@@ -172,6 +172,47 @@ function sameDate(targetDate, calendarDate) {
     } else return false;
 }
 
+function manageContacts(contacts) {
+
+    let contactChannels;
+    let contactIds = [];
+
+    adapter.getChannels(function (err, channels) {
+        contactChannels = channels;
+        adapter.log.info(JSON.stringify(channels));
+
+        contacts.forEach((person) => {
+            if (person.names && person.names.length > 0) {
+                contactIds.push(addContact(person));
+            } else {
+                adapter.log.info('No display name found for connection.');
+            }
+        });
+    
+        removeUnused(channels, contactIds);
+    });
+}
+
+function removeUnused(oldList, newList) {
+
+    for(let i = 0; i < oldList.length; i++) {
+
+        let inNewList = false;
+
+        for(let j = 0; j < newList.length; j++) {
+            adapter.log.info('THE ID: ' + oldList[i]._id.replace(adapter.namespace + '.', ''));
+            if(newList[j] == oldList[i]._id.replace(adapter.namespace + '.', '')) {
+                inNewList = true;
+            }
+        }
+
+        if(inNewList == false) {
+            adapter.deleteChannel(oldList[i]._id);
+        }
+
+   }
+}
+
 function addContact(contact) {
     
     const contactId = contact.names[0].metadata.source.id;
@@ -224,6 +265,8 @@ function addContact(contact) {
     });
 
     adapter.setStateAsync(contactId + `.photo`, { val: contact.photos[0].url, ack: true });
+
+    return contactId;
 }
 
 function getGoogleCalendarEvents(calendar, auth, index) {
@@ -249,15 +292,7 @@ function getGoogleCalendarEvents(calendar, auth, index) {
             if (err) return adapter.log.info('The API returned an error: ' + err);
             const connections = res.data.connections;
             if (connections) {
-              adapter.log.info('Connections:');
-              connections.forEach((person) => {
-                if (person.names && person.names.length > 0) {
-                    adapter.log.info(JSON.stringify(person.names[0].displayName));
-                    addContact(person);
-                } else {
-                    adapter.log.info('No display name found for connection.');
-                }
-              });
+                manageContacts(connections);
             } else {
                 adapter.log.info('No connections found.');
             }
