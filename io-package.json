@@ -1,0 +1,110 @@
+{
+    "common": {
+        "name": "contact",
+        "version": "0.0.1",
+        "news": {
+            "0.0.1": {
+                "en": "initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "Начальная версия",
+                "pt": "lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial",
+                "pl": "Pierwsze wydanie",
+                "zh-cn": "首次出版"
+            }
+        },
+        "title": "Contact",
+        "titleLang": {
+            "en": "contact",
+            "de": "Kalender",
+            "ru": "Календарь",
+            "pt": "Calendário",
+            "nl": "Kalender",
+            "fr": "Calendrier",
+            "it": "contactio",
+            "es": "contactio",
+            "pl": "Kalendarz",
+            "zh-cn": "日历"
+        },
+        "desc": {
+            "en": "Connect to google and outlook contact",
+            "de": "Stellen Sie eine Verbindung zu Google und Outlook Kalender her",
+            "ru": "Подключиться к Google и Outlook календаря",
+            "pt": "Conecte-se ao calendário do Google e do Outlook",
+            "nl": "Maak verbinding met Google en Outlook-agenda",
+            "fr": "Connectez-vous à Google et au calendrier Outlook",
+            "it": "Collegati a Google e Outlook contact",
+            "es": "Conéctese al contactio de Google y Outlook",
+            "pl": "Połącz się z Google i kalendarzem Outlook",
+            "zh-cn": "连接到Google和Outlook日历"
+        },
+        "authors": [
+            "WLAN-Kabel wlan-kabel@outlook.de"
+        ],
+        "keywords": [
+            "ioBroker",
+            "contact",
+            "Smart Home",
+            "home automation"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "contact.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/WLAN-Kabel/ioBroker.contact/master/admin/contact.png",
+        "readme": "https://github.com/WLAN-Kabel/ioBroker.contact/blob/master/README.md",
+        "loglevel": "info",
+        "restartAdapters": [
+            "vis"
+        ],
+        "localLink": "%web_protocol%://%ip%:%web_port%",
+        "mode": "daemon",
+        "type": "date-and-time",
+        "compact": true,
+        "materialize": true,
+        "materializeTab": true,
+        "adminTab": {
+            "singleton": true,
+            "name": {
+                "en": "contact",
+                "de": "Kalender",
+                "ru": "Календарь",
+                "pt": "Calendário",
+                "nl": "Kalender",
+                "fr": "Calendrier",
+                "it": "contactio",
+                "es": "contactio",
+                "pl": "Kalendarz",
+                "zh-cn": "日历"
+            },
+            "link": "",
+            "fa-icon": "info"
+        },
+        "supportCustoms": true,
+        "dependencies": [
+            {
+                "js-controller": ">=1.4.2"
+            },
+            "vis"
+        ]
+    },
+    "native": {
+        "port": 8095,
+        "googleActive": false,
+        "fqdn": "localhost",
+        "google": [
+            {
+              "name": "contact",
+              "accessToken": "",
+              "refreshToken": "",
+              "id": ""
+            }
+        ]
+    },
+    "objects": [],
+    "instanceObjects": []
+}
