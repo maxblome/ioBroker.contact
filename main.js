@@ -19,7 +19,21 @@ let adapter;
 let oauth2;
 const googleScope = 'https://www.googleapis.com/auth/contacts.readonly';
 
-class Calendar extends utils.Adapter {
+const objectCommon = {
+    familyName:     {name: 'Family Name',       type: 'string',     role: 'contact.familyName'},
+    givenName:      {name: 'Given Name',        type: 'string',     role: 'contact.givenName'},
+    photo:          {name: 'Photo',             type: 'string',     role: 'contact.photo'},
+    streetAddress:  {name: 'Street Address',    type: 'string',     role: 'contact.streetAddress'},
+    city:           {name: 'City',              type: 'string',     role: 'contact.city'},
+    postalCode:     {name: 'Postal Code',       type: 'string',     role: 'contact.postalCode'},
+    country:        {name: 'Country',           type: 'string',     role: 'contact.country'},
+    emailAddresses: {name: 'Email Addresses',   type: 'string',     role: 'contact.emailAddresses'},
+    phoneNumbers:   {name: 'Phone Numbers',     type: 'string',     role: 'contact.phoneNumbers'}
+};
+
+let contacts = [];
+
+class Contact extends utils.Adapter {
 
     /**
      * @param {Partial<ioBroker.AdapterOptions>} [options={}]
@@ -37,11 +51,18 @@ class Calendar extends utils.Adapter {
 
     async onReady() {
 
+        if(!String.prototype.startsWith) {
+            String.prototype.startsWith = function(searchString, position) {
+                position = position || 0;
+                return this.indexOf(searchString, position) === position;
+            };
+        }
+
         if(this.config.googleActive) {
             oauth2 = getGoogleAuthentication(adapter.config);
         }
 
-        if(hasCalendarWithoutGrantPermission(adapter.config)) {
+        if(hasAccountWithoutGrantPermission(adapter.config)) {
             initServer(adapter.config);
         }
 
@@ -50,6 +71,24 @@ class Calendar extends utils.Adapter {
                 startSchedule(adapter.config, oauth2);
             }
         }
+
+        adapter.setObjectNotExistsAsync('query', {
+            type: 'state',
+            common: {
+                name: 'Query phone number',
+                type: 'string',
+                role: 'contact.query',
+                read: true,
+                write: true
+            },
+            native: {},
+        });
+        //adapter.setStateAsync('query', { val: '', ack: true });
+
+        addState('familyName', 'Queried family name', 'string', 'contact.familyName');
+        addState('givenName', 'Queried given name', 'string', 'contact.givenName');
+        addState('photo', 'Queried photo', 'string', 'contact.photo');
+        addState('id', 'Queried id', 'string', 'contact.id');
 
         // in this template all states changes inside the adapters namespace are subscribed
         this.subscribeStates('*');
@@ -76,10 +115,10 @@ class Calendar extends utils.Adapter {
     onObjectChange(id, obj) {
         if (obj) {
             // The object was changed
-            this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
+            //this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
         } else {
             // The object was deleted
-            this.log.info(`object ${id} deleted`);
+            //this.log.info(`object ${id} deleted`);
         }
     }
 
@@ -89,50 +128,57 @@ class Calendar extends utils.Adapter {
      * @param {ioBroker.State | null | undefined} state
      */
     onStateChange(id, state) {
-        if (state) {
-            // The state was changed
-            this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
-        } else {
-            // The state was deleted
-            this.log.info(`state ${id} deleted`);
+
+        if(id == adapter.namespace + '.query') {
+            if(state) {
+                if(state.ack == false) {
+                    const number = state.val;
+                    queryContactByPhoneNumber(number);
+                }
+            }
+        }
+    }
+}
+
+function queryContactByPhoneNumber(number) {
+
+    number = cleanPhoneNumber(number);
+
+    for(let i = 0; i < contacts.length; i++) {
+        for(let j = 0; j < contacts[i].phoneNumbers.length; j++) {
+
+            const tmpNumber = cleanPhoneNumber(contacts[i].phoneNumbers[j].value);
+
+            if(tmpNumber == number) {
+                addState('familyName', 'Queried family name', 'string', 'contact.familyName', contacts[i].familyName);
+                addState('givenName', 'Queried given name', 'string', 'contact.givenName', contacts[i].givenName);
+                addState('photo', 'Queried photo', 'string', 'contact.photo', contacts[i].photo);
+                addState('id', 'Queried id', 'string', 'contact.id', contacts[i].id);
+
+                return;
+            }
         }
     }
 
-    // /**
-    //  * Some message was sent to this instance over message box. Used by email, pushover, text2speech, ...
-    //  * Using this method requires "common.message" property to be set to true in io-package.json
-    //  * @param {ioBroker.Message} obj
-    //  */
-    // onMessage(obj) {
-    // 	if (typeof obj === 'object' && obj.message) {
-    // 		if (obj.command === 'send') {
-    // 			// e.g. send email or pushover or whatever
-    // 			this.log.info('send command');
-
-    // 			// Send response in callback if required
-    // 			if (obj.callback) this.sendTo(obj.from, obj.command, 'Message received', obj.callback);
-    // 		}
-    // 	}
-    // }
-
+    addState('familyName', 'Queried family name', 'string', 'contact.familyName', '');
+    addState('givenName', 'Queried given name', 'string', 'contact.givenName', '');
+    addState('photo', 'Queried photo', 'string', 'contact.photo', '');
+    addState('id', 'Queried id', 'string', 'contact.id', '');
 }
 
-function getDatetime(add = 0, hours = 0, mins = 0, secs = 0) {
-    // current timestamp in milliseconds
-    const dateObj = new Date();
-    dateObj.setDate(dateObj.getDate() + add);
-    dateObj.setHours(hours);
-    dateObj.setMinutes(mins);
-    dateObj.setSeconds(secs);
-    const date = (`0${dateObj.getDate()}`).slice(-2);
-    const month = (`0${dateObj.getMonth() + 1}`).slice(-2);
-    const year = dateObj.getFullYear();
-    const hour = (`0${dateObj.getHours()}`).slice(-2);
-    const min = (`0${dateObj.getMinutes()}`).slice(-2);
-    const sec = (`0${dateObj.getSeconds()}`).slice(-2);
+function cleanPhoneNumber(number) {
+    
+    number = number.replace(/[+/()\-\\ ]/g, '');
 
-    // prints date & time in YYYY-MM-DD format 2011-06-03T10:00:00Z
-    return `${year}-${month}-${date}T${hour}:${min}:${sec}Z`;
+    if(number.startsWith('00')) {
+        number = number.replace('00', '');
+    }
+
+    if(number.startsWith('0')) {
+        number = number.replace('0', '49');
+    }
+
+    return number;
 }
 
 async function updateConfig(newConfig) {
@@ -149,91 +195,188 @@ async function updateConfig(newConfig) {
 
 function startSchedule(config, auth) {
 
-    const googleCalendars = config.google;
+    const googleAccount = config.google;
     
-    for(let i = 0; i < googleCalendars.length; i++) {
-        getGoogleCalendarEvents(googleCalendars[i], auth, i);
+    for(let i = 0; i < googleAccount.length; i++) {
+        getGoogleContacts(googleAccount[i], auth, i);
     }
 
-    cron.schedule('*/5 * * * *', () => {
-        for(let i = 0; i < googleCalendars.length; i++) {
-            getGoogleCalendarEvents(googleCalendars[i], auth, i);
+    //0 */10 * * *
+
+    cron.schedule('0 */' + googleAccount[0].hours + ' * * *', () => {
+        for(let i = 0; i < googleAccount.length; i++) {
+            getGoogleContacts(googleAccount[i], auth, i);
         }
     });
 }
 
-function sameDate(targetDate, calendarDate) {
+function manageContacts(contactList) {
+    
+    const contactIds = [];
 
-    targetDate = targetDate.substr(0, 10);
-    calendarDate = calendarDate.substr(0, 10);
+    adapter.getChannels(function (err, channels) {
 
-    if(targetDate == calendarDate) {
-        return true;
-    } else return false;
+        contactList.forEach((person) => {
+
+            contacts = [];
+
+            if (person.names && person.names.length > 0) {
+                contactIds.push(addContact(person));
+            } else {
+                adapter.log.info('No display name found for connection.');
+            }
+        });
+    
+        removeUnused(channels, contactIds);
+    });
+}
+
+function removeUnused(oldList, newList) {
+
+    for(let i = 0; i < oldList.length; i++) {
+
+        let inNewList = false;
+
+        for(let j = 0; j < newList.length; j++) {
+            if(newList[j] == oldList[i]._id.split('.')[2]) {
+                inNewList = true;
+            }
+        }
+
+        if(inNewList == false) {
+            adapter.log.warn(oldList[i]._id);
+            adapter.deleteChannel(oldList[i]._id);
+        }
+    }
+}
+
+function removeChannel(id) {
+
+    adapter.getChannels(function (err, channels) {
+
+        for(let i = 0; i < channels.length; i++) {
+            if(id == channels[i]._id) {
+                adapter.deleteChannel(id);
+            }
+        }
+    });
+}
+
+function addChannel(id, name) {
+    adapter.setObjectNotExistsAsync(id, {
+        type: 'channel',
+        common: {
+            name: name,
+        },
+        native: {},
+    });
+}
+
+function addState(id, name, type, role, value = null) {
+    adapter.setObjectNotExistsAsync(id, {
+        type: 'state',
+        common: {
+            name: name,
+            type: type,
+            role: role,
+            read: true,
+            write: false
+        },
+        native: {},
+    });
+    if(value != null) {
+        adapter.setStateAsync(id, { val: value, ack: true });
+    }
 }
 
 function addContact(contact) {
     
+    const contactJson = {};
+
     const contactId = contact.names[0].metadata.source.id;
 
-    adapter.setObjectNotExistsAsync(contactId, {
-        type: 'channel',
-        common: {
-            name: contact.names[0].displayNameLastFirst,
-        },
-        native: {},
-    });
+    //Add contact channel
+    addChannel(contactId, contact.names[0].displayNameLastFirst);
+    contactJson.id = contactId;
 
-    adapter.setObjectNotExistsAsync(contactId + `.familyName`, {
-        type: 'state',
-        common: {
-            name: 'Summary',
-            type: 'string',
-            role: 'contact.name',
-            read: false,
-            write: false
-        },
-        native: {},
-    });
-    adapter.setStateAsync(contactId + `.familyName`, { val: contact.names[0].familyName, ack: true });
+    const familyName = objectCommon.familyName;
+    addState(contactId + '.familyName', familyName.name, familyName.type, familyName.role, contact.names[0].familyName);
+    contactJson.familyName = contact.names[0].familyName;
 
-    adapter.setObjectNotExistsAsync(contactId + `.givenName`, {
-        type: 'state',
-        common: {
-            name: 'Summary',
-            type: 'string',
-            role: 'contact.name',
-            read: false,
-            write: false
-        },
-        native: {},
-    });
+    const givenName = objectCommon.givenName;
+    addState(contactId + '.givenName', givenName.name, givenName.type, givenName.role, contact.names[0].givenName);
+    contactJson.givenName = contact.names[0].givenName;
 
-    adapter.setStateAsync(contactId + `.givenName`, { val: contact.names[0].givenName, ack: true });
+    const photo = objectCommon.photo;
+    addState(contactId + '.photo', photo.name, photo.type, photo.role, contact.photos[0].url);
+    contactJson.photo = contact.photos[0].url;
 
-    adapter.setObjectNotExistsAsync(contactId + `.photo`, {
-        type: 'state',
-        common: {
-            name: 'Summary',
-            type: 'string',
-            role: 'contact.name',
-            read: false,
-            write: false
-        },
-        native: {},
-    });
+    if(contact.addresses) {
+        //Add addresses channel
+        addChannel(contactId + '.addresses', 'Addresses');
 
-    adapter.setStateAsync(contactId + `.photo`, { val: contact.photos[0].url, ack: true });
+        const streetAddress = objectCommon.streetAddress;
+        const city = objectCommon.city;
+        const postalCode = objectCommon.postalCode;
+        const country = objectCommon.country;
+
+        for(let i = 0; i < contact.addresses.length; i++) {
+            
+            const address = contact.addresses[i];
+
+            addState(contactId + '.addresses.' + i + '.streetAddress', streetAddress.name, streetAddress.type, streetAddress.role, address.streetAddress);
+            addState(contactId + '.addresses.' + i + '.city', city.name, city.type, city.role, address.city);
+            addState(contactId + '.addresses.' + i + '.postalCode', postalCode.name, postalCode.type, postalCode.role, address.postalCode);
+            addState(contactId + '.addresses.' + i + '.country', country.name, country.type, country.role, address.country);
+        }
+    } else removeChannel(contactId + '.addresses');
+
+    const contactJsonNumbers = [];
+
+    if(contact.phoneNumbers) {
+        //Add phonenumbers channel
+        addChannel(contactId + '.phoneNumbers', 'Phone Numbers');
+
+        const phoneNumbers = objectCommon.phoneNumbers;
+
+        for(let i = 0; i < contact.phoneNumbers.length; i++) {
+            
+            const phoneNumber = contact.phoneNumbers[i];
+
+            addState(contactId + '.phoneNumbers.' + i, phoneNumbers.name, phoneNumbers.type, phoneNumbers.role, phoneNumber.value);
+            contactJsonNumbers.push({value: phoneNumber.value});
+        }
+    } else removeChannel(contactId + '.phoneNumbers');
+    contactJson.phoneNumbers = contactJsonNumbers;
+
+    if(contact.emailAddresses) {
+
+        //Add emailaddresses channel
+        addChannel(contactId + '.emailAddresses', 'Email Addresses');
+
+        const emailAddresses = objectCommon.emailAddresses;
+
+        for(let i = 0; i < contact.emailAddresses.length; i++) {
+            
+            const emailAddress = contact.emailAddresses[i];
+            
+            addState(contactId + '.emailAddresses.' + i, emailAddresses.name, emailAddresses.type, emailAddresses.role, emailAddress.value);
+        }
+    } else removeChannel(contactId + '.emailAddresses');
+
+    contacts.push(contactJson);
+
+    return contactId;
 }
 
-function getGoogleCalendarEvents(calendar, auth, index) {
+function getGoogleContacts(account, auth, index) {
 
-    if(calendar.accessToken && calendar.refreshToken && calendar.refreshToken != '' && calendar.id != '') {
+    if(account.accessToken && account.refreshToken && account.refreshToken != '' && account.id != '') {
 
         const oauth2 = auth;
         oauth2.setCredentials({
-            access_token: calendar.accessToken,
-            refresh_token: calendar.refreshToken
+            access_token: account.accessToken,
+            refresh_token: account.refreshToken
         });
 
         const cal = google.people({
@@ -244,35 +387,30 @@ function getGoogleCalendarEvents(calendar, auth, index) {
         cal.people.connections.list({
             resourceName: 'people/me',
             pageSize: 10,
-            personFields: 'names,emailAddresses,photos,phoneNumbers,urls,addresses',
-          }, (err, res) => {
+            personFields: 'names,emailAddresses,photos,phoneNumbers,addresses',
+        }, (err, res) => {
             if (err) return adapter.log.info('The API returned an error: ' + err);
-            const connections = res.data.connections;
-            if (connections) {
-              adapter.log.info('Connections:');
-              connections.forEach((person) => {
-                if (person.names && person.names.length > 0) {
-                    adapter.log.info(JSON.stringify(person.names[0].displayName));
-                    addContact(person);
+            if(res) {
+                const connections = res.data.connections;
+                if (connections) {
+                    manageContacts(connections);
+                    adapter.log.info(`Contacts for account "${account.name}" have been updated.`);
                 } else {
-                    adapter.log.info('No display name found for connection.');
+                    adapter.log.info('No connections found.');
                 }
-              });
-            } else {
-                adapter.log.info('No connections found.');
-            }
+            } else adapter.log.info('No response found.');
         });
-    } else adapter.log.warn(`No permission granted for calendar "${calendar.name}". Please visit http://${adapter.config.fqdn}:${adapter.config.port}/google/login/${index}`);
+    } else adapter.log.warn(`No permission granted for account "${account.name}". Please visit http://${adapter.config.fqdn}:${adapter.config.port}/google/login/${index}`);
 }
 
-function hasCalendarWithoutGrantPermission(config) {
+function hasAccountWithoutGrantPermission(config) {
 
     if(config.googleActive) {
 
-        const googleCalendars = config.google;
+        const googleAccount = config.google;
 
-        for(let i = 0; i < googleCalendars.length; i++) {
-            if(!googleCalendars[i].accessToken || !googleCalendars[i].refreshToken || googleCalendars[i].refreshToken == '') {
+        for(let i = 0; i < googleAccount.length; i++) {
+            if(!googleAccount[i].accessToken || !googleAccount[i].refreshToken || googleAccount[i].refreshToken == '') {
                 return true;
             }
         }
@@ -287,43 +425,9 @@ function getGoogleAuthentication(settings) {
 
     if(settings.googleClientID && settings.googleClientSecret && settings.fqdn && settings.port)  {
         oauth2 = new google.auth.OAuth2(settings.googleClientID, settings.googleClientSecret, `http://${settings.fqdn}:${settings.port}/google`);
-    } else adapter.log.warn('Client id, client secret, fqdn or port missing for google calendar.');
+    } else adapter.log.warn('Client id, client secret, fqdn or port missing for google account.');
 
     return oauth2;
-}
-
-function getGoogleCalendarId(index, auth, callback) {
-
-    let id = [];
-
-    const cal = google.calendar({
-        version: 'v3',
-        auth: auth
-    });
-
-    cal.calendarList.list((err, res) => {
-        if (err) {
-            adapter.log.error('The Google API returned an error.');
-            adapter.log.error(err);
-            callback(id);
-        }
-
-        if(res) {
-            const items = res.data.items;
-            if(items) {
-                if(items.length === 0) {
-                    adapter.log.warn('No calendar id found.');
-                } else {
-                    const calendarId = items[0].id || '';
-
-                    id.push(calendarId);
-                    id.push(new Buffer(calendarId).toString('base64').replace('=', '').replace('+', '').replace('/', ''));
-
-                    callback(id);
-                }
-            }
-        }
-    });
 }
 
 function initServer(settings) {
@@ -334,7 +438,7 @@ function initServer(settings) {
 
         server = {
             app: express(),
-            server: null ,
+            server: null,
             settings:  settings
         };
 
@@ -343,13 +447,13 @@ function initServer(settings) {
 
                 const id = req.params.id;
                 
-                //Check if calendar id exists
+                //Check if account id exists
                 if(id < settings.google.length && id >= 0) {
 
-                    const calendar = settings.google[id];
+                    const account = settings.google[id];
 
                     //Check if a refresh token exists
-                    if(!calendar.refreshToken) {
+                    if(!account.refreshToken) {
 
                         const url = oauth2.generateAuthUrl({
                             scope: googleScope,
@@ -360,8 +464,8 @@ function initServer(settings) {
                         });
 
                         res.redirect(url);
-                    } else res.send(`The rights for calendar ${req.params.id} have already been granted.`); 
-                } else res.send(`Cannot find calendar ${req.params.id}.`);
+                    } else res.send(`The rights for account ${req.params.id} have already been granted.`); 
+                } else res.send(`Cannot find account ${req.params.id}.`);
             });
 
             server.app.get('/google/success', function (req, res) {
@@ -380,43 +484,24 @@ function initServer(settings) {
                                     if(scope[i] == googleScope) {
 
                                         oauth2.getToken(req.query.code, function(err, tokens) {
+
                                             if (err) {
                                                 adapter.log.error(err);
                                                 res.send(err);
                                                 return;
                                             }
                                         
-                                            adapter.log.info(`Received rights for google calendar ${req.query.state} (${settings.google[req.query.state].name})`);
+                                            adapter.log.info(`Received rights for google account ${req.query.state} (${settings.google[req.query.state].name})`);
                                             
-                                            //settings.google[req.query.state].oauth2 = oauth2;
                                             oauth2.setCredentials(tokens);
-                                            
-                                            getGoogleCalendarId(req.query.state, oauth2, (id) => {
 
-                                                let configGoogle = adapter.config.google;
-                                                
-                                                configGoogle[req.query.state].id = id[1];
-                                                configGoogle[req.query.state].email = id[0];
-                                                configGoogle[req.query.state].accessToken = tokens.access_token;
-                                                configGoogle[req.query.state].refreshToken = tokens.refresh_token;
+                                            const configGoogle = adapter.config.google;
 
-                                                /*adapter.setObjectNotExistsAsync(id[1] + '.email', {
-                                                    type: 'state',
-                                                    common: {
-                                                        name: 'E-Mail',
-                                                        type: 'string',
-                                                        role: 'email',
-                                                        read: false,
-                                                        write: false
-                                                    },
-                                                    native: {},
-                                                });
-                            
-                                                adapter.setStateAsync(id[1] + '.email', { val: id[0], ack: true });*/
+                                            configGoogle[req.query.state].accessToken = tokens.access_token;
+                                            configGoogle[req.query.state].refreshToken = tokens.refresh_token;
 
-                                                updateConfig({
-                                                    google: configGoogle
-                                                });
+                                            updateConfig({
+                                                google: configGoogle
                                             });
                                         });
 
@@ -428,8 +513,8 @@ function initServer(settings) {
                                     res.redirect('/google/success');
                                 } else res.send('Wrong scope were defined');
                             } else res.send('No scope were defined');
-                        } else res.send(`Calendar ${req.query.state} not found`);
-                    } else res.send('No calendar defined');
+                        } else res.send(`Account ${req.query.state} not found`);
+                    } else res.send('No account defined');
                 } else res.send('No parameters were passed');            
             });
         }
@@ -461,7 +546,7 @@ function startAdapter(options) {
 
     const opts = options || {};
 
-    adapter = new Calendar(opts);
+    adapter = new Contact(opts);
 
     return adapter;
 }

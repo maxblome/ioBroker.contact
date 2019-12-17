@@ -37,19 +37,43 @@ Save the file and open the webinterface via the <FQDN> you have written in the h
     Comming soon ...
 
 ### Google API Key
-You need an api key. Visit https://console.cloud.google.com/apis/dashboard and login with your google account.
 
-Open the list in the header and create a new project. Enter a project name like "ioBroker contact" and click create.
+#### !!! Note: If you have already installed and set up the iobroker.contact adapter you only need to add the API to your project (3.).
 
-Make sure you have selected the right project from the list. Open the library tab. Search for "contact" and click on "Google People API".
+1. You need an api key. Visit https://console.cloud.google.com/apis/dashboard and login with your google account.
 
-Click "activate" and then click on "APIs & Services". Open the tab "OAuth consent screen" and type a application name like "ioBroker contact". You can also upload a logo, but this is not necessary.
+2. Open the list in the header and create a new project. Enter a project name like "ioBroker" and click create.
 
-Open the "Credentials" tab, click the "Create credentials" dropdown and select "OAuth client ID". In the next step choose "Web application". Type a name like "ioBroker" or "Webclient". Add ```http://<FQDN>:<Port from adapter config>``` to authorised JavaScript origins. Add ```http://<FQDN>:<Port from adapter config>/google``` and ```http://<FQDN>:<Port from adapter config>/google/``` to Authorised redirect URIs.
+3. Make sure you have selected the right project from the list. Open the library tab. Search for "contact" and click on "Google People API".
 
-Create the client id and copy the displayed client ID and the client secret.
+4. Click "activate" and then click on "APIs & Services". Open the tab "OAuth consent screen" and type a application name like "ioBroker". You can also upload a logo, but this is not necessary.
+
+5. Open the "Credentials" tab, click the "Create credentials" dropdown and select "OAuth client ID". In the next step choose "Web application". Type a name like "ioBroker" or "Webclient". Add ```http://<FQDN>:<Port from adapter config>``` to authorised JavaScript origins. Add ```http://<FQDN>:<Port from adapter config>/google``` and ```http://<FQDN>:<Port from adapter config>/google/``` to Authorised redirect URIs.
+
+6. Create the client id and copy the displayed client ID and the client secret.
 
 Go to the adapter config an add the client ID and the client secret.
+
+### contact.0
+
+| State name | meaning |
+| - | - |
+| query | Query a contact for a phone number |
+| familyName | Family name of the requested contact |
+| givenName | Given name of the requested contact |
+| photo | Photo of the requested contact |
+| id | ID of the requested contact |
+
+### contact.0.*.
+
+| State name | meaning |
+| - | - |
+| familyName | Family name of the contact |
+| givenName | Given name of the contact |
+| photo | Photo of the contact |
+| addresses.* | Adresses of the contact |
+| emailAddresses.* | Email adresses of the contact |
+| phoneNumbers.* | Phone numbers of the contact |
 
 ## Changelog
 

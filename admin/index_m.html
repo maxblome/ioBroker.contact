@@ -79,9 +79,8 @@
     </script>
     <style>
         td:nth-of-type(2), /* ID */
-        td:nth-of-type(3), /* E-Mail */
-        td:nth-of-type(4), /* Access Token */
-        td:nth-of-type(5) { /* Refresh Token */
+        td:nth-of-type(3), /* Access Token */
+        td:nth-of-type(4) { /* Refresh Token */
             display: none;
         }
     </style>
@@ -94,7 +93,6 @@
                 <ul class="tabs">
                     <li class="tab col s2"><a href="#tab-main" class="translate active">Main</a></li>
                     <li class="tab col s2"><a href="#tab-google" class="translate">Google</a></li>
-                    <li class="tab col s2"><a href="#tab-microsoft" class="translate">Microsoft</a></li>
                 </ul>
             </div>
 
@@ -102,7 +100,7 @@
             <div id="tab-main" class="col s12 page">
                 <div class="row">
                     <div class="col s12 m4 l2">
-                        <img src="calendar.png" class="logo">
+                        <img src="contact.png" class="logo">
                     </div>
                 </div>
                 <div class="row">
@@ -118,7 +116,7 @@
                 <div class="row">
                     <div class="col s12 m12">
                         <input class="value" id="googleActive" type="checkbox"/>
-                        <span class="translate" for="googleActive">Activate Google calendar</span>
+                        <span class="translate" for="googleActive">Activate Google account</span>
                     </div>
                 </div>
                 <div class="row">
@@ -136,28 +134,22 @@
                     </div>
                 </div>
                 <div class="col s12 m12" id="google">
-                    <a class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                    <!--<a class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>-->
                     <div class="table-values-div">
                         <table id="google-values" class="table-values">
                             <thead>
                                 <tr>
                                     <th data-name="name" class="translate">name</th>
                                     <th data-name="id" style="display: none">id</th>
-                                    <th data-name="email" style="display: none">email</th>
                                     <th data-name="accessToken" style="display: none">accessToken</th>
                                     <th data-name="refreshToken" style="display: none">refreshToken</th>
-                                    <th data-name="days" class="translate" data-type="number" data-min="1" data-max="365" data-default="7">days</th>
+                                    <th data-name="days" class="translate" data-type="number" data-min="1" data-max="24" data-default="12">hours</th>
                                     <!--<th data-name="color" data-type="color" class="translate">color</th> comming soon-->
-                                    <th data-buttons="delete up down"></th>
+                                    <!--<th data-buttons="delete up down"></th>-->
                                 </tr>
                             </thead>
                         </table>
                     </div>
-                </div>
-            </div>
-            <div id="tab-microsoft" class="col s12 page">
-                <div class="col s12 m12" id="google">
-                    <p class="translate">Comming soon</p>
                 </div>
             </div>
         </div>

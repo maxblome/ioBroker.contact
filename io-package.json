@@ -19,27 +19,27 @@
         "title": "Contact",
         "titleLang": {
             "en": "contact",
-            "de": "Kalender",
-            "ru": "Календарь",
-            "pt": "Calendário",
-            "nl": "Kalender",
-            "fr": "Calendrier",
-            "it": "contactio",
-            "es": "contactio",
-            "pl": "Kalendarz",
-            "zh-cn": "日历"
+            "de": "Kontakt",
+            "ru": "контакт",
+            "pt": "contato",
+            "nl": "contact",
+            "fr": "contact",
+            "it": "contatto",
+            "es": "contacto",
+            "pl": "kontakt",
+            "zh-cn": "联系"
         },
         "desc": {
-            "en": "Connect to google and outlook contact",
-            "de": "Stellen Sie eine Verbindung zu Google und Outlook Kalender her",
-            "ru": "Подключиться к Google и Outlook календаря",
-            "pt": "Conecte-se ao calendário do Google e do Outlook",
-            "nl": "Maak verbinding met Google en Outlook-agenda",
-            "fr": "Connectez-vous à Google et au calendrier Outlook",
-            "it": "Collegati a Google e Outlook contact",
-            "es": "Conéctese al contactio de Google y Outlook",
-            "pl": "Połącz się z Google i kalendarzem Outlook",
-            "zh-cn": "连接到Google和Outlook日历"
+            "en": "Connect to your google contacts",
+            "de": "Stellen Sie eine Verbindung zu Ihren Google-Kontakten her",
+            "ru": "Подключитесь к своим контактам Google",
+            "pt": "Conecte-se aos seus contatos do google",
+            "nl": "Maak verbinding met uw Google-contacten",
+            "fr": "Connectez-vous à vos contacts Google",
+            "it": "Collegati ai tuoi contatti Google",
+            "es": "Conéctate a tus contactos de google",
+            "pl": "Połącz się z kontaktami Google",
+            "zh-cn": "连接到您的Google联系人"
         },
         "authors": [
             "WLAN-Kabel wlan-kabel@outlook.de"
@@ -58,10 +58,6 @@
         "extIcon": "https://raw.githubusercontent.com/WLAN-Kabel/ioBroker.contact/master/admin/contact.png",
         "readme": "https://github.com/WLAN-Kabel/ioBroker.contact/blob/master/README.md",
         "loglevel": "info",
-        "restartAdapters": [
-            "vis"
-        ],
-        "localLink": "%web_protocol%://%ip%:%web_port%",
         "mode": "daemon",
         "type": "date-and-time",
         "compact": true,
@@ -71,15 +67,15 @@
             "singleton": true,
             "name": {
                 "en": "contact",
-                "de": "Kalender",
-                "ru": "Календарь",
-                "pt": "Calendário",
-                "nl": "Kalender",
-                "fr": "Calendrier",
-                "it": "contactio",
-                "es": "contactio",
-                "pl": "Kalendarz",
-                "zh-cn": "日历"
+                "de": "Kontakt",
+                "ru": "контакт",
+                "pt": "contato",
+                "nl": "contact",
+                "fr": "contact",
+                "it": "contatto",
+                "es": "contacto",
+                "pl": "kontakt",
+                "zh-cn": "联系"
             },
             "link": "",
             "fa-icon": "info"
@@ -88,12 +84,11 @@
         "dependencies": [
             {
                 "js-controller": ">=1.4.2"
-            },
-            "vis"
+            }
         ]
     },
     "native": {
-        "port": 8095,
+        "port": 8096,
         "googleActive": false,
         "fqdn": "localhost",
         "google": [
@@ -101,7 +96,8 @@
               "name": "contact",
               "accessToken": "",
               "refreshToken": "",
-              "id": ""
+              "id": "",
+              "hours": 12
             }
         ]
     },
