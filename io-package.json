@@ -63,23 +63,6 @@
         "compact": true,
         "materialize": true,
         "materializeTab": true,
-        "adminTab": {
-            "singleton": true,
-            "name": {
-                "en": "contact",
-                "de": "Kontakt",
-                "ru": "контакт",
-                "pt": "contato",
-                "nl": "contact",
-                "fr": "contact",
-                "it": "contatto",
-                "es": "contacto",
-                "pl": "kontakt",
-                "zh-cn": "联系"
-            },
-            "link": "",
-            "fa-icon": "info"
-        },
         "supportCustoms": true,
         "dependencies": [
             {
