@@ -395,7 +395,7 @@ function getGoogleContacts(account, auth, index) {
 
         cal.people.connections.list({
             resourceName: 'people/me',
-            pageSize: 10,
+            /*pageSize: 10,*/
             personFields: 'names,emailAddresses,photos,phoneNumbers,addresses',
         }, (err, res) => {
             if (err) return adapter.log.info('The API returned an error: ' + err);
