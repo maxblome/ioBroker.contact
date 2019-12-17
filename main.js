@@ -203,7 +203,16 @@ function startSchedule(config, auth) {
 
     //0 */10 * * *
 
-    cron.schedule('0 */' + googleAccount[0].hours + ' * * *', () => {
+    const hours = googleAccount[0].hours;
+    let cronInterval = '0 */';
+
+    if(hours && hours > 0 && hours <= 24) {
+        cronInterval += hours + ' * * *';
+    } else {
+        cronInterval += 12 + ' * * *';
+    }
+
+    cron.schedule(cronInterval, () => {
         for(let i = 0; i < googleAccount.length; i++) {
             getGoogleContacts(googleAccount[i], auth, i);
         }
