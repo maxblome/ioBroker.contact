@@ -38,7 +38,7 @@ Save the file and open the webinterface via the <FQDN> you have written in the h
 
 ### Google API Key
 
-!!! Note: If you have already installed and set up the iobroker.contact adapter you only need to add the API to your project (3.).
+#### !!! Note: If you have already installed and set up the iobroker.contact adapter you only need to add the API to your project (3.).
 
 1. You need an api key. Visit https://console.cloud.google.com/apis/dashboard and login with your google account.
 
@@ -64,7 +64,7 @@ Go to the adapter config an add the client ID and the client secret.
 | photo | Photo of the requested contact |
 | id | ID of the requested contact |
 
-### contact.0.<id>
+### contact.0.*.
 
 | State name | meaning |
 | - | - |
