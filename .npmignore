@@ -30,3 +30,6 @@ maintenance/**
 
 
 www_old/
+.git/
+.github/
+main.test.js
