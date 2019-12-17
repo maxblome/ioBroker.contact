@@ -371,7 +371,7 @@ function addContact(contact) {
 
 function getGoogleContacts(account, auth, index) {
 
-    if(account.accessToken && account.refreshToken && account.refreshToken != '' && account.id != '') {
+    if(account.accessToken && account.refreshToken && account.refreshToken != ''/* && account.id != '' //Comming soon*/) {
 
         const oauth2 = auth;
         oauth2.setCredentials({
