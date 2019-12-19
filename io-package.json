@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "contact",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "news": {
+            "0.0.2": {
+                "en": "Fixed an issue that restricted the search.\nLimit of 100 contacts has been removed.",
+                "de": "Es wurde ein Problem behoben, durch das die Suche eingeschränkt wurde.\nBegrenzung von 100 Kontakten wurde entfernt.",
+                "ru": "Исправлена проблема, которая ограничивала поиск.\nОпределено 100 контактов.",
+                "pt": "Corrigido um problema que restringia a pesquisa.\nO limite de 100 contatos foi removido.",
+                "nl": "Probleem opgelost dat de zoekopdracht beperkte.\nBeperking van 100 contacten is verwijderd.",
+                "fr": "Correction d'un problème qui limitait la recherche.\nLa limite de 100 contacts a été supprimée.",
+                "it": "Risolto il problema che limitava la ricerca.\nIl limite di 100 contatti è stato rimosso.",
+                "es": "Se solucionó un problema que restringía la búsqueda.\nSe eliminó el límite de 100 contactos.",
+                "pl": "Naprawiono problem ograniczający wyszukiwanie.\nOgraniczono 100 kontaktów.",
+                "zh-cn": "已解决限制搜索的问题。\n限制了100个联系人。"
+            },
             "0.0.1": {
                 "en": "initial release",
                 "de": "Erstveröffentlichung",

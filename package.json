@@ -1,6 +1,6 @@
 {
   "name": "iobroker.contact",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Connect to google and outlook contact",
   "author": {
     "name": "WLAN-Kabel",
