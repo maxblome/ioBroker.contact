@@ -144,10 +144,14 @@ function queryContactByPhoneNumber(number) {
 
     number = cleanPhoneNumber(number);
 
+    adapter.log.debug('Queried phonenumber: ' + number);
+
     for(let i = 0; i < contacts.length; i++) {
         for(let j = 0; j < contacts[i].phoneNumbers.length; j++) {
 
             const tmpNumber = cleanPhoneNumber(contacts[i].phoneNumbers[j].value);
+
+            adapter.log.debug('Compared phonenumber: ' + tmpNumber);
 
             if(tmpNumber == number) {
                 addState('familyName', 'Queried family name', 'string', 'contact.familyName', contacts[i].familyName);
@@ -223,11 +227,11 @@ function manageContacts(contactList) {
     
     const contactIds = [];
 
+    contacts = [];
+
     adapter.getChannels(function (err, channels) {
 
         contactList.forEach((person) => {
-
-            contacts = [];
 
             if (person.names && person.names.length > 0) {
                 contactIds.push(addContact(person));
