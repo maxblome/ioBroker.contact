@@ -230,9 +230,9 @@ function manageContacts(contactList) {
     contacts = [];
 
     adapter.getChannels(function (err, channels) {
-
+        
         contactList.forEach((person) => {
-
+            
             if (person.names && person.names.length > 0) {
                 contactIds.push(addContact(person));
             } else {
@@ -382,7 +382,7 @@ function addContact(contact) {
     return contactId;
 }
 
-function getGoogleContacts(account, auth, index) {
+function getGoogleContacts(account, auth, index, nextPageToken = '', connections = []) {
 
     if(account.accessToken && account.refreshToken && account.refreshToken != ''/* && account.id != '' //Comming soon*/) {
 
@@ -399,18 +399,29 @@ function getGoogleContacts(account, auth, index) {
 
         cal.people.connections.list({
             resourceName: 'people/me',
-            /*pageSize: 10,*/
+            pageToken: nextPageToken,
             personFields: 'names,emailAddresses,photos,phoneNumbers,addresses',
         }, (err, res) => {
             if (err) return adapter.log.info('The API returned an error: ' + err);
             if(res) {
-                const connections = res.data.connections;
-                if (connections) {
-                    manageContacts(connections);
+
+                const tmpCon = [
+                    ...connections,
+                    ...res.data.connections
+                ];
+
+                if(res.data.nextPageToken) {
+
+                    getGoogleContacts(account, auth, index, res.data.nextPageToken, tmpCon);
+
+                } else if (tmpCon) {
+                    
+                    manageContacts(tmpCon);
+                    
                     adapter.log.info(`Contacts for account "${account.name}" have been updated.`);
-                } else {
-                    adapter.log.info('No connections found.');
-                }
+
+                } else adapter.log.info('No connections found.');
+
             } else adapter.log.info('No response found.');
         });
     } else adapter.log.warn(`No permission granted for account "${account.name}". Please visit http://${adapter.config.fqdn}:${adapter.config.port}/google/login/${index}`);
