@@ -240,6 +240,7 @@ function manageContacts(contactList) {
                 contactIds.push(addContact(person));
             } else {
                 adapter.log.info('No display name found for connection.');
+                adapter.log.debug(JSON.stringify(person));
             }
         });
     
