@@ -1,7 +1,7 @@
 {
   "name": "iobroker.contact",
   "version": "0.0.2",
-  "description": "Connect to google and outlook contact",
+  "description": "Connect to your google contacts",
   "author": {
     "name": "WLAN-Kabel",
     "email": "wlan-kabel@outlook.de"
