@@ -1,7 +1,7 @@
 {
   "name": "iobroker.contact",
-  "version": "0.0.2",
-  "description": "Connect to google and outlook contact",
+  "version": "0.0.3",
+  "description": "Connect to your google contacts",
   "author": {
     "name": "WLAN-Kabel",
     "email": "wlan-kabel@outlook.de"
@@ -21,7 +21,7 @@
   "dependencies": {
     "@iobroker/adapter-core": "^1.0.3",
     "express": "^4.13.3",
-    "googleapis": "^45.0.0",
+    "googleapis": "^46.0.0",
     "node-cron": "^2.0.3"
   },
   "devDependencies": {

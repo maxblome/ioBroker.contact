@@ -179,7 +179,10 @@ function cleanPhoneNumber(number) {
     }
 
     if(number.startsWith('0')) {
-        number = number.replace('0', '49');
+
+        const countryNumber = (adapter.config.google[0].country) ? adapter.config.google[0].country.split('(')[0].replace(/[+/()\-\\ ]/g, '') : '49';
+
+        number = number.replace('0', countryNumber);
     }
 
     return number;

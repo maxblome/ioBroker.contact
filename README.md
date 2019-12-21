@@ -77,6 +77,13 @@ Go to the adapter config an add the client ID and the client secret.
 
 ## Changelog
 
+### 0.0.3
+* (WLAN-Kabel) Standard country code can now be selected yourself
+
+### 0.0.2
+* (WLAN-Kabel) Fixed an issue that restricted the search
+* (WLAN-Kabel) Limit of 100 contacts has been removed
+
 ### 0.0.1
 * (WLAN-Kabel) Initial release
 

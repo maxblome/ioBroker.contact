@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "contact",
-        "version": "0.0.2",
+        "version": "0.0.3",
         "news": {
+            "0.0.3": {
+                "en": "Standard country code can now be selected yourself.",
+                "de": "Der Standard-Ländercode kann jetzt selbst ausgewählt werden.",
+                "ru": "Стандартный код страны теперь можно выбрать самостоятельно.",
+                "pt": "O código padrão do país agora pode ser selecionado você mesmo.",
+                "nl": "De standaardlandcode kan nu zelf worden geselecteerd.",
+                "fr": "Le code pays standard peut maintenant être sélectionné vous-même.",
+                "it": "Ora è possibile selezionare manualmente il codice paese standard.",
+                "es": "El código de país estándar ahora puede seleccionarse usted mismo.",
+                "pl": "Standardowy kod kraju można teraz wybrać samodzielnie.",
+                "zh-cn": "现在可以自行选择标准国家/地区代码。"
+            },
             "0.0.2": {
                 "en": "Fixed an issue that restricted the search.\nLimit of 100 contacts has been removed.",
                 "de": "Es wurde ein Problem behoben, durch das die Suche eingeschränkt wurde.\nBegrenzung von 100 Kontakten wurde entfernt.",
@@ -92,7 +104,8 @@
               "accessToken": "",
               "refreshToken": "",
               "id": "",
-              "hours": 12
+              "hours": 12,
+              "country": "+49 (Germany)"
             }
         ]
     },
