@@ -92,7 +92,8 @@
               "accessToken": "",
               "refreshToken": "",
               "id": "",
-              "hours": 12
+              "hours": 12,
+              "country": "+49 (Germany)"
             }
         ]
     },
