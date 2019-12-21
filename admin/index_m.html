@@ -49,6 +49,8 @@
                 settings.google[c].name = settings.google[c].name || '';
                 settings.google[c].id = settings.google[c].id || '';
                 settings.google[c].color = settings.google[c].color || '';
+                settings.google[c].hours = settings.google[c].hours || '12';
+                settings.google[c].country = settings.google[c].country || '+49 (Germany)';
             }
 
             onChange(false);
@@ -144,6 +146,14 @@
                                     <th data-name="accessToken" style="display: none">accessToken</th>
                                     <th data-name="refreshToken" style="display: none">refreshToken</th>
                                     <th data-name="hours" class="translate" data-type="number" data-min="1" data-max="24" data-default="12">hours</th>
+                                    <th data-name="country" data-type="select" class="translate" data-options="+30 (Greece);+31 (Netherlands);+32 (Belgium);+33 (France);+34 (Spain); +350 (Gibraltar);+351 (Portugal);+352 (Luxembourg);+353 (Ireland);
++354 (Iceland);+355 (Albania);+356 (Malta);+357 (Cyprus);
++358 (Finland);+359 (Bulgaria);+36 (Hungary);
++370 (Lithuania);+371 (Latvia);+372 (Estonia);+373 (Moldova);+374 (Armenia);+375 (Belarus);+376 (Andorra);
++377 (monaco);+378 (San Marino);+379 (Vatican city);+380 (Ukraine);
++381 (Serbia);+382 (Montenegro);+383 (Kosovo);+385 (Croatia);+386 (Slovenia);+387 (Bosnia and Herzegovina);+389 (Macedonia);
++39 (Italy);+40 (Romania);+41 (Switzerland);+420 (Czech Republic);+421 (Slovakia);
++43 (Austria);+44 (United Kingdom);+45 (Denmark);+46 (Sweden);+47 (Norway);+48 (Poland);+49 (Germany);+7 (Russia)">country</th>
                                     <!--<th data-name="color" data-type="color" class="translate">color</th> comming soon-->
                                     <!--<th data-buttons="delete up down"></th>-->
                                 </tr>
