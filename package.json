@@ -21,7 +21,7 @@
   "dependencies": {
     "@iobroker/adapter-core": "^1.0.3",
     "express": "^4.13.3",
-    "googleapis": "^45.0.0",
+    "googleapis": "^46.0.0",
     "node-cron": "^2.0.3"
   },
   "devDependencies": {
