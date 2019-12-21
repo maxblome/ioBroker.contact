@@ -1,6 +1,6 @@
 {
   "name": "iobroker.contact",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Connect to your google contacts",
   "author": {
     "name": "WLAN-Kabel",
