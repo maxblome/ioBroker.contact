@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "contact",
-        "version": "0.0.3",
+        "version": "1.0.0",
         "news": {
+            "1.0.0": {
+                "en": "Added Nextcloud contacts\nAdded state fullName to query and each contact\nFQDN and interval moved to main tab\nChanged channel name for addresses, emailAddresses and phoneNumbers\nAdded type state for emailAddresses and phoneNumbers",
+                "de": "Nextcloud-Kontakte hinzugefügt\nZustand fullName zur Abfrage hinzugefügt und jeder Kontakt\nFQDN und Intervall auf Hauptregisterkarte verschoben\nChanged-Kanalname für Adressen, E-Mail-Adressen und Telefonnummern\nZustand für E-Mail-Adressen und Telefonnummern hinzugefügt",
+                "ru": "Добавлены контакты Nextcloud\nДобавлено состояние fullName для запроса, и каждый контакт\nFQDN и интервал перемещены на главную вкладку\nИзмененное имя канала для адресов, адресов электронной почты и номеров телефонов\nСостояние добавленного типа для адресов электронной почты адресов и номеров телефонов",
+                "pt": "Adicionados contatos Nextcloud\nAdicionado estado fullName para consulta e cada contato\nFQDN e intervalo foram movidos para a guia principal\nNome do canal alterado para endereços, emailAddresses e phoneNumbers\nEstado de tipo adicionado para emailAddresses e phoneNumbers",
+                "nl": "Nextcloud-contacten toegevoegd\nToestand volledige naam toegevoegd aan zoekopdracht en elk contact\nFQDN en interval verplaatst naar hoofdtabblad\nVeranderde kanaalnaam voor adressen, e-mailAdressen en telefoonnummers\nType toegevoegd voor e-mailAdressen en telefoonnummers",
+                "fr": "Contacts Nextcloud ajoutés\nÉtat ajouté nom complet à la requête et chaque contact\nFQDN et intervalle déplacés vers l'onglet principal\nNom de canal modifié pour les adresses, adresses électroniques et numéros de téléphone\nÉtat du type ajouté pour les adresses e-mail et numéros de téléphone",
+                "it": "Aggiunti contatti Nextcloud\nStato aggiunto fullName da interrogare e ogni contatto\nFQDN e intervallo spostati nella scheda principale\nNome del canale modificato per indirizzi, e-mailIndirizzo e numero di telefono\nStato di tipo aggiunto per e-mail Indirizzo e numero di telefono",
+                "es": "Se agregaron los contactos de Nextcloud\nSe agregó el nombre completo del estado a la consulta y cada contacto\nFQDN y el intervalo se movieron a la pestaña principal\nSe cambió el nombre del canal para direcciones, direcciones de correo electrónico y números de teléfono\nSe agregó el tipo de estado para direcciones de correo electrónico y números de teléfono",
+                "pl": "Dodano kontakty Nextcloud\nDodano stan fullName do zapytania, a każdy kontakt\nFQDN i interwał przeniesiono na kartę główną\nZmieniono nazwę kanału dla adresów, adresów e-mail i numerów telefonów",
+                "zh-cn": "已添加Nextcloud联系人\n已添加状态全名以进行查询和每个联系人\nFQDN和间隔已移至主选项卡\n已更改地址，电子邮件地址和电话号码的频道名称\n已添加了电子邮件地址和电话号码的类型状态"
+            },
             "0.0.3": {
                 "en": "Standard country code can now be selected yourself.",
                 "de": "Der Standard-Ländercode kann jetzt selbst ausgewählt werden.",
@@ -98,13 +110,24 @@
         "port": 8096,
         "googleActive": false,
         "fqdn": "localhost",
+        "interval": 12,
         "google": [
             {
-              "name": "contact",
+              "name": "Contact Google",
               "accessToken": "",
               "refreshToken": "",
               "id": "",
-              "hours": 12,
+              "country": "+49 (Germany)"
+            }
+        ],
+        "nextcloudActive": false,
+        "nextcloud": [
+            {
+              "name": "Contact Nextcloud",
+              "hostname": "https://nextcloud.example.com",
+              "username": "max.mustermann@example.com",
+              "password": "1234",
+              "id": "",
               "country": "+49 (Germany)"
             }
         ]
