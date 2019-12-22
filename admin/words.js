@@ -134,7 +134,19 @@ systemDictionary = {
         'pl': 'odśwież token',
         'zh-cn': '刷新令牌'
     },
-    'hours': {
+    'Nextcloud': {
+        'en': 'Nextcloud',
+        'de': 'Nextcloud',
+        'ru': 'Nextcloud',
+        'pt': 'Nextcloud',
+        'nl': 'Nextcloud',
+        'fr': 'Nextcloud',
+        'it': 'Nextcloud',
+        'es': 'Nextcloud',
+        'pl': 'Nextcloud',
+        'zh-cn': 'Nextcloud'
+    },
+    'Interval:': {
         'en': 'update interval (in hours)',
         'de': 'Aktualisierungsintervall (in Stunden)',
         'ru': 'интервал обновления (в часах)',
@@ -145,5 +157,65 @@ systemDictionary = {
         'es': 'intervalo de actualización (en horas)',
         'pl': 'interwał aktualizacji (w godzinach)',
         'zh-cn': '更新间隔（以小时为单位）'
+    },
+    'country': {
+        'en': 'country',
+        'de': 'Land',
+        'ru': 'страна',
+        'pt': 'país',
+        'nl': 'land',
+        'fr': 'pays',
+        'it': 'nazione',
+        'es': 'país',
+        'pl': 'kraj',
+        'zh-cn': '国家'
+    },
+    'Activate Nextcloud account': {
+        'en': 'Activate Nextcloud account',
+        'de': 'Aktiviere den Nextcloud Account',
+        'ru': 'Активировать учетную запись Nextcloud',
+        'pt': 'Ativar conta Nextcloud',
+        'nl': 'Activeer Nextcloud-account',
+        'fr': 'Activer le compte Nextcloud',
+        'it': "Attiva l'account Nextcloud",
+        'es': 'Activa la cuenta de Nextcloud',
+        'pl': 'Aktywuj konto Nextcloud',
+        'zh-cn': '激活Nextcloud帐户'
+    },
+    'hostname': {
+        'en': 'hostname',
+        'de': 'Hostname',
+        'ru': 'имя хоста',
+        'pt': 'nome de anfitrião',
+        'nl': 'hostname',
+        'fr': "nom d'hôte",
+        'it': 'Nome host',
+        'es': 'nombre de host',
+        'pl': 'nazwa hosta',
+        'zh-cn': '主机名'
+    },
+    'username': {
+        'en': 'username',
+        'de': 'Nutzername',
+        'ru': 'имя пользователя',
+        'pt': 'nome do usuário',
+        'nl': 'gebruikersnaam',
+        'fr': "Nom d'utilisateur",
+        'it': 'nome utente',
+        'es': 'nombre de usuario',
+        'pl': 'Nazwa Użytkownika',
+        'zh-cn': '用户名'
+    },
+    'password': {
+        'en': 'password',
+        'de': 'Passwort',
+        'ru': 'пароль',
+        'pt': 'senha',
+        'nl': 'wachtwoord',
+        'fr': 'mot de passe',
+        'it': "parola d'ordine",
+        'es': 'contraseña',
+        'pl': 'hasło',
+        'zh-cn': '密码'
     }
 };

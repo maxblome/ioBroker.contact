@@ -10,16 +10,16 @@
 
 [![NPM](https://nodei.co/npm/iobroker.contact.png?downloads=true)](https://nodei.co/npm/iobroker.contact/)
 
-**Tests:**: [![Travis-CI](http://img.shields.io/travis/WLAN-Kabel/ioBroker.contact/master.svg)](https://travis-ci.org/WLAN-Kabel/ioBroker.contact)
+**Tests:** [![Travis-CI](http://img.shields.io/travis/WLAN-Kabel/ioBroker.contact/master.svg)](https://travis-ci.org/WLAN-Kabel/ioBroker.contact) [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/WLAN-Kabel/ioBroker.contact?branch=master&svg=true)](https://ci.appveyor.com/project/WLANKabel/ioBroker-contact/)
 
 ## Contact adapter for ioBroker
 
-Read your google contact.
+Read your google and nextcloud contacts.
 
 ## Todo
 * 
 
-## Google Authentication
+## Google Authentication (only for google accounts, not for nextcloud accounts)
 The following step is only needed if your ioBroker is installed on another computer/server and you cannot acces the webinterface via localhost.
 
 ### Windows:
@@ -61,6 +61,7 @@ Go to the adapter config an add the client ID and the client secret.
 | query | Query a contact for a phone number |
 | familyName | Family name of the requested contact |
 | givenName | Given name of the requested contact |
+| fullName | Full name of the requested contact |
 | photo | Photo of the requested contact |
 | id | ID of the requested contact |
 
@@ -70,6 +71,7 @@ Go to the adapter config an add the client ID and the client secret.
 | - | - |
 | familyName | Family name of the contact |
 | givenName | Given name of the contact |
+| fullName | Full name of the contact |
 | photo | Photo of the contact |
 | addresses.* | Adresses of the contact |
 | emailAddresses.* | Email adresses of the contact |
@@ -77,14 +79,21 @@ Go to the adapter config an add the client ID and the client secret.
 
 ## Changelog
 
-### 0.0.3
+### 1.0.0 (2019-12-23)
+* (WLAN-Kabel) Added Nextcloud contacts
+* (WLAN-Kabel) Added state fullName to query and each contact
+* (WLAN-Kabel) FQDN and interval moved to main tab
+* (WLAN-Kabel) Changed channel name for addresses, emailAddresses and phoneNumbers
+* (WLAN-Kabel) Added type state for emailAddresses and phoneNumbers
+
+### 0.0.3 (2019-12-21)
 * (WLAN-Kabel) Standard country code can now be selected yourself
 
-### 0.0.2
+### 0.0.2 (2019-12-21)
 * (WLAN-Kabel) Fixed an issue that restricted the search
 * (WLAN-Kabel) Limit of 100 contacts has been removed
 
-### 0.0.1
+### 0.0.1 (2019-12-17)
 * (WLAN-Kabel) Initial release
 
 ## License

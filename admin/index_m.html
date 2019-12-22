@@ -19,6 +19,7 @@
 
     <script type="text/javascript">
         var google = [];
+        var nextcloud = [];
 
         // This will be called by the admin adapter when the settings page loads
         function load(settings, onChange) {
@@ -41,21 +42,31 @@
                 }
             });
 
-            var table = document.getElementById("google-values");
-
             google = settings.google || [];          
+            nextcloud = settings.nextcloud || [];
 
-            for (var c = 0; c < settings.google.length; c++) {
-                settings.google[c].name = settings.google[c].name || '';
-                settings.google[c].id = settings.google[c].id || '';
-                settings.google[c].color = settings.google[c].color || '';
-                settings.google[c].hours = settings.google[c].hours || '12';
-                settings.google[c].country = settings.google[c].country || '+49 (Germany)';
+            for (var c = 0; c < google.length; c++) {
+                google[c].name = google[c].name || '';
+                google[c].id = google[c].id || '';
+                google[c].color = google[c].color || '';
+                google[c].hours = google[c].hours || '12';
+                google[c].country = google[c].country || '+49 (Germany)';
+            }
+
+            for (var c = 0; c < nextcloud.length; c++) {
+                nextcloud[c].name = nextcloud[c].name || '';
+                nextcloud[c].id = nextcloud[c].id || '';
+                nextcloud[c].email = nextcloud[c].email || '';
+                nextcloud[c].password = nextcloud[c].password || '';
+                nextcloud[c].color = nextcloud[c].color || '';
+                nextcloud[c].hours = nextcloud[c].hours || '12';
+                nextcloud[c].country = nextcloud[c].country || '+49 (Germany)';
             }
 
             onChange(false);
 
             values2table('google', google, onChange);
+            values2table('nextcloud', nextcloud, onChange);
             
             // reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
             if (M) M.updateTextFields();
@@ -75,14 +86,16 @@
             });
 
             obj.google = table2values('google');
+            obj.nextcloud = table2values('nextcloud');
 
             callback(obj);
         }
     </script>
     <style>
-        td:nth-of-type(2), /* ID */
-        td:nth-of-type(3), /* Access Token */
-        td:nth-of-type(4) { /* Refresh Token */
+        #google td:nth-of-type(2), /* ID */
+        #google td:nth-of-type(3), /* Access Token */
+        #google td:nth-of-type(4), /* Refresh Token */
+        #nextcloud td:nth-of-type(1) {  /* ID */
             display: none;
         }
     </style>
@@ -95,6 +108,7 @@
                 <ul class="tabs">
                     <li class="tab col s2"><a href="#tab-main" class="translate active">Main</a></li>
                     <li class="tab col s2"><a href="#tab-google" class="translate">Google</a></li>
+                    <li class="tab col s2"><a href="#tab-nextcloud" class="translate">Nextcloud</a></li>
                 </ul>
             </div>
 
@@ -107,8 +121,18 @@
                 </div>
                 <div class="row">
                     <div class="col s12 m6">
+                        <input class="value" id="fqdn" type="text" placeholder="localhost or calendar.de"/>
+                        <label class="translate" for="fqdn">FQDN:</label>
+                    </div>
+                    <div class="col s12 m6">
                         <input class="value" id="port" type="number" min="1" max="65565"/>
                         <label class="translate" for="port">Port:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m6">
+                        <input class="value" id="interval" type="number" min="1" max="24"/>
+                        <label class="translate" for="port">Interval:</label>
                     </div>
                 </div>
             </div>
@@ -127,12 +151,8 @@
                         <label class="translate" for="googleClientID">Client ID:</label>
                     </div>
                     <div class="col s12 m6">
-                            <input class="value" id="googleClientSecret" type="text"/>
-                            <label class="translate" for="googleClientSecret">Client Secret:</label>
-                        </div>
-                    <div class="col s12 m6">
-                        <input class="value" id="fqdn" type="text" placeholder="localhost or calendar.de"/>
-                        <label class="translate" for="fqdn">FQDN:</label>
+                        <input class="value" id="googleClientSecret" type="text"/>
+                        <label class="translate" for="googleClientSecret">Client Secret:</label>
                     </div>
                 </div>
                 <div class="col s12 m12" id="google">
@@ -145,7 +165,7 @@
                                     <th data-name="id" style="display: none">id</th>
                                     <th data-name="accessToken" style="display: none">accessToken</th>
                                     <th data-name="refreshToken" style="display: none">refreshToken</th>
-                                    <th data-name="hours" class="translate" data-type="number" data-min="1" data-max="24" data-default="12">hours</th>
+                                    <!--<th data-name="hours" class="translate" data-type="number" data-min="1" data-max="24" data-default="12">hours</th>-->
                                     <th data-name="country" data-type="select" class="translate" data-options="+30 (Greece);+31 (Netherlands);+32 (Belgium);+33 (France);+34 (Spain); +350 (Gibraltar);+351 (Portugal);+352 (Luxembourg);+353 (Ireland);
 +354 (Iceland);+355 (Albania);+356 (Malta);+357 (Cyprus);
 +358 (Finland);+359 (Bulgaria);+36 (Hungary);
@@ -155,6 +175,42 @@
 +39 (Italy);+40 (Romania);+41 (Switzerland);+420 (Czech Republic);+421 (Slovakia);
 +43 (Austria);+44 (United Kingdom);+45 (Denmark);+46 (Sweden);+47 (Norway);+48 (Poland);+49 (Germany);+7 (Russia)">country</th>
                                     <!--<th data-name="color" data-type="color" class="translate">color</th> comming soon-->
+                                    <!--<th data-buttons="delete up down"></th>-->
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="tab-nextcloud" class="col s12 page">
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="col s12 m12">
+                        <input class="value" id="nextcloudActive" type="checkbox"/>
+                        <span class="translate" for="nextcloudActive">Activate Nextcloud account</span>
+                    </div>
+                </div>
+                <div class="col s12 m12" id="nextcloud">
+                    <!--<a class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>-->
+                    <div class="table-values-div">
+                        <table id="nextcloud-values" class="table-values">
+                            <thead>
+                                <tr>
+                                    <th data-name="name" class="translate">name</th>
+                                    <th data-name="id" style="display: none">id</th>
+                                    <th data-name="hostname" class="translate">hostname</th>
+                                    <th data-name="username" class="translate">username</th>
+                                    <th data-name="password" data-type="password" class="translate">password</th>
+                                    <!--<th data-name="hours" class="translate" data-type="number" data-min="1" data-max="24" data-default="12">hours</th>-->
+                                    <th data-name="country" data-type="select" class="translate" data-options="+30 (Greece);+31 (Netherlands);+32 (Belgium);+33 (France);+34 (Spain); +350 (Gibraltar);+351 (Portugal);+352 (Luxembourg);+353 (Ireland);
++354 (Iceland);+355 (Albania);+356 (Malta);+357 (Cyprus);
++358 (Finland);+359 (Bulgaria);+36 (Hungary);
++370 (Lithuania);+371 (Latvia);+372 (Estonia);+373 (Moldova);+374 (Armenia);+375 (Belarus);+376 (Andorra);
++377 (monaco);+378 (San Marino);+379 (Vatican city);+380 (Ukraine);
++381 (Serbia);+382 (Montenegro);+383 (Kosovo);+385 (Croatia);+386 (Slovenia);+387 (Bosnia and Herzegovina);+389 (Macedonia);
++39 (Italy);+40 (Romania);+41 (Switzerland);+420 (Czech Republic);+421 (Slovakia);
++43 (Austria);+44 (United Kingdom);+45 (Denmark);+46 (Sweden);+47 (Norway);+48 (Poland);+49 (Germany);+7 (Russia)">country</th>
                                     <!--<th data-buttons="delete up down"></th>-->
                                 </tr>
                             </thead>
