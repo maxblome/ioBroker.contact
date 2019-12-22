@@ -10,7 +10,7 @@
 
 [![NPM](https://nodei.co/npm/iobroker.contact.png?downloads=true)](https://nodei.co/npm/iobroker.contact/)
 
-**Tests:**: [![Travis-CI](http://img.shields.io/travis/WLAN-Kabel/ioBroker.contact/master.svg)](https://travis-ci.org/WLAN-Kabel/ioBroker.contact)
+**Tests:** [![Travis-CI](http://img.shields.io/travis/WLAN-Kabel/ioBroker.contact/master.svg)](https://travis-ci.org/WLAN-Kabel/ioBroker.contact) [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/WLAN-Kabel/ioBroker.contact?branch=master&svg=true)](https://ci.appveyor.com/project/WLANKabel/ioBroker-contact/)
 
 ## Contact adapter for ioBroker
 
