@@ -134,18 +134,6 @@ systemDictionary = {
         'pl': 'odśwież token',
         'zh-cn': '刷新令牌'
     },
-    'hours': {
-        'en': 'update interval (in hours)',
-        'de': 'Aktualisierungsintervall (in Stunden)',
-        'ru': 'интервал обновления (в часах)',
-        'pt': 'intervalo de atualização (em horas)',
-        'nl': 'update-interval (in uren)',
-        'fr': 'intervalle de mise à jour (en heures)',
-        'it': 'intervallo di aggiornamento (in ore)',
-        'es': 'intervalo de actualización (en horas)',
-        'pl': 'interwał aktualizacji (w godzinach)',
-        'zh-cn': '更新间隔（以小时为单位）'
-    },
     'Nextcloud': {
         'en': 'Nextcloud',
         'de': 'Nextcloud',
@@ -159,16 +147,16 @@ systemDictionary = {
         'zh-cn': 'Nextcloud'
     },
     'Interval:': {
-        'en': 'Interval:',
-        'de': 'Intervall:',
-        'ru': 'Интервал:',
-        'pt': 'Intervalo:',
-        'nl': 'Interval:',
-        'fr': 'Intervalle:',
-        'it': 'Intervallo:',
-        'es': 'Intervalo:',
-        'pl': 'Interwał:',
-        'zh-cn': '间隔：'
+        'en': 'update interval (in hours)',
+        'de': 'Aktualisierungsintervall (in Stunden)',
+        'ru': 'интервал обновления (в часах)',
+        'pt': 'intervalo de atualização (em horas)',
+        'nl': 'update-interval (in uren)',
+        'fr': 'intervalle de mise à jour (en heures)',
+        'it': 'intervallo di aggiornamento (in ore)',
+        'es': 'intervalo de actualización (en horas)',
+        'pl': 'interwał aktualizacji (w godzinach)',
+        'zh-cn': '更新间隔（以小时为单位）'
     },
     'country': {
         'en': 'country',
