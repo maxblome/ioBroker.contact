@@ -241,7 +241,7 @@ function startSchedule(config, auth) {
         startNextcloudSchedule(config);
     }
 
-    startRemoveScheduler();
+    startRemoveScheduler(config);
 
     const interval = config.interval;
     let cronInterval = '0 */';
@@ -256,21 +256,15 @@ function startSchedule(config, auth) {
 
         contacts = [];
         
-        startGoogleSchedule(config, auth);
-
-        let wait = true;
-
-        while(wait) {
-
-            if(googleContactsLoaded && nextcloudContactsLoaded) {
-                adapter.getChannels(function (err, channels) {
-                
-                    removeUnused(channels, contacts);
-                });
-
-                wait = false;
-            }
+        if(config.googleActive && auth) {
+            startGoogleSchedule(config, auth);
         }
+    
+        if(config.nextcloudActive) {
+            startNextcloudSchedule(config);
+        }
+    
+        startRemoveScheduler(config);
     });
 }
 
@@ -312,6 +306,21 @@ function manageGoogleContacts(contactList) {
     contactList.forEach((person) => {
             
         if (person.names && person.names.length > 0) {
+            addGoogleContact(person);
+        } else if (person.organizations && person.organizations.length > 0) {
+
+            person.names = [];
+
+            const names = {displayName: person.organizations[0].name,
+                displayNameLastFirst: person.organizations[0].name,
+                metadata: {
+                    source: {
+                        id: person.organizations[0].metadata.source.id
+                    }
+                }};
+
+            person.names.push(names);
+
             addGoogleContact(person);
         } else {
             adapter.log.info('No display name found for connection.');
@@ -375,9 +384,8 @@ function addState(id, name, type, role, value = null) {
         },
         native: {},
     });
-    if(value != null) {
-        adapter.setStateAsync(id, { val: value, ack: true });
-    }
+    
+    adapter.setStateAsync(id, { val: (value || ''), ack: true });
 }
 
 function addNextcloudContact(contact) {
@@ -394,8 +402,8 @@ function addNextcloudContact(contact) {
     contactJson.givenName = '';
 
     const fullName = objectCommon.fullName;
-    addState(contactId + '.fullName', fullName.name, fullName.type, fullName.role, contact.fn);
-    contactJson.fullName = contact.fn;
+    addState(contactId + '.fullName', fullName.name, fullName.type, fullName.role, contact.fn || '');
+    contactJson.fullName = contact.fn || '';
 
     const photo = objectCommon.photo;
     addState(contactId + '.photo', photo.name, photo.type, photo.role, contact.photo || '');
@@ -414,10 +422,10 @@ function addNextcloudContact(contact) {
             
             const address = contact.address[i];
 
-            addState(contactId + '.address.' + i + '.streetAddress', streetAddress.name, streetAddress.type, streetAddress.role, address.street);
-            addState(contactId + '.address.' + i + '.city', city.name, city.type, city.role, address.city);
-            addState(contactId + '.address.' + i + '.postalCode', postalCode.name, postalCode.type, postalCode.role, address.postalCode);
-            addState(contactId + '.address.' + i + '.country', country.name, country.type, country.role, address.country);
+            addState(contactId + '.address.' + i + '.streetAddress', streetAddress.name, streetAddress.type, streetAddress.role, address.street || '');
+            addState(contactId + '.address.' + i + '.city', city.name, city.type, city.role, address.city || '');
+            addState(contactId + '.address.' + i + '.postalCode', postalCode.name, postalCode.type, postalCode.role, address.postalCode || '');
+            addState(contactId + '.address.' + i + '.country', country.name, country.type, country.role, address.country || '');
         }
     } else removeChannel(contactId + '.address');
 
@@ -433,9 +441,9 @@ function addNextcloudContact(contact) {
             
             const phoneNumber = contact.phonenumber[i];
 
-            addState(contactId + '.phoneNumber.' + i + '.value', phoneNumbers.name, phoneNumbers.type, phoneNumbers.role, phoneNumber.value);
-            addState(contactId + '.phoneNumber.' + i + '.type', phoneNumbers.name, phoneNumbers.type, phoneNumbers.role, phoneNumber.type);
-            contactJsonNumbers.push({value: phoneNumber.value});
+            addState(contactId + '.phoneNumber.' + i + '.value', phoneNumbers.name, phoneNumbers.type, phoneNumbers.role, phoneNumber.value || '');
+            addState(contactId + '.phoneNumber.' + i + '.type', phoneNumbers.name, phoneNumbers.type, phoneNumbers.role, phoneNumber.type || '');
+            contactJsonNumbers.push({value: phoneNumber.value || ''});
         }
     } else removeChannel(contactId + '.phoneNumber');
     contactJson.phoneNumbers = contactJsonNumbers;
@@ -451,8 +459,8 @@ function addNextcloudContact(contact) {
             
             const emailAddress = contact.email[i];
             
-            addState(contactId + '.emailAddress.' + i + '.value', emailAddresses.name, emailAddresses.type, emailAddresses.role, emailAddress.value);
-            addState(contactId + '.emailAddress.' + i + '.type', emailAddresses.name, emailAddresses.type, emailAddresses.role, emailAddress.type);
+            addState(contactId + '.emailAddress.' + i + '.value', emailAddresses.name, emailAddresses.type, emailAddresses.role, emailAddress.value || '');
+            addState(contactId + '.emailAddress.' + i + '.type', emailAddresses.name, emailAddresses.type, emailAddresses.role, emailAddress.type || '');
         }
     } else removeChannel(contactId + '.emailAddress');
 
@@ -467,25 +475,27 @@ function addGoogleContact(contact) {
 
     const contactId = contact.names[0].metadata.source.id;
 
+    adapter.log.warn(JSON.stringify(contact));
+
     //Add contact channel
-    addChannel(contactId, contact.names[0].displayNameLastFirst);
+    addChannel(contactId, (contact.names[0].displayNameLastFirst || ''));
     contactJson.id = contactId;
 
     const familyName = objectCommon.familyName;
-    addState(contactId + '.familyName', familyName.name, familyName.type, familyName.role, contact.names[0].familyName);
-    contactJson.familyName = contact.names[0].familyName;
+    addState(contactId + '.familyName', familyName.name, familyName.type, familyName.role, (contact.names[0].familyName || ''));
+    contactJson.familyName = contact.names[0].familyName || '';
 
     const givenName = objectCommon.givenName;
-    addState(contactId + '.givenName', givenName.name, givenName.type, givenName.role, contact.names[0].givenName);
-    contactJson.givenName = contact.names[0].givenName;
+    addState(contactId + '.givenName', givenName.name, givenName.type, givenName.role, (contact.names[0].givenName || ''));
+    contactJson.givenName = (contact.names[0].givenName || '');
 
     const fullName = objectCommon.fullName;
-    addState(contactId + '.fullName', fullName.name, fullName.type, fullName.role, contact.names[0].givenName + ' ' + contact.names[0].familyName);
-    contactJson.fullName = contact.names[0].givenName + ' ' + contact.names[0].familyName;
+    addState(contactId + '.fullName', fullName.name, fullName.type, fullName.role, (contact.names[0].displayName || ''));
+    contactJson.fullName = (contact.names[0].displayName || '');
 
     const photo = objectCommon.photo;
-    addState(contactId + '.photo', photo.name, photo.type, photo.role, contact.photos[0].url);
-    contactJson.photo = contact.photos[0].url;
+    addState(contactId + '.photo', photo.name, photo.type, photo.role, (contact.photos[0].url || ''));
+    contactJson.photo = (contact.photos[0].url || '');
 
     if(contact.addresses) {
         //Add addresses channel
@@ -500,10 +510,10 @@ function addGoogleContact(contact) {
             
             const address = contact.addresses[i];
 
-            addState(contactId + '.address.' + i + '.streetAddress', streetAddress.name, streetAddress.type, streetAddress.role, address.streetAddress);
-            addState(contactId + '.address.' + i + '.city', city.name, city.type, city.role, address.city);
-            addState(contactId + '.address.' + i + '.postalCode', postalCode.name, postalCode.type, postalCode.role, address.postalCode);
-            addState(contactId + '.address.' + i + '.country', country.name, country.type, country.role, address.country);
+            addState(contactId + '.address.' + i + '.streetAddress', streetAddress.name, streetAddress.type, (streetAddress.role, address.streetAddress || ''));
+            addState(contactId + '.address.' + i + '.city', city.name, city.type, city.role, (address.city || ''));
+            addState(contactId + '.address.' + i + '.postalCode', postalCode.name, postalCode.type, postalCode.role, (address.postalCode || ''));
+            addState(contactId + '.address.' + i + '.country', country.name, country.type, country.role, (address.country || ''));
         }
     } else removeChannel(contactId + '.address');
 
@@ -519,9 +529,9 @@ function addGoogleContact(contact) {
             
             const phoneNumber = contact.phoneNumbers[i];
 
-            addState(contactId + '.phoneNumber.' + i + '.value', phoneNumbers.name, phoneNumbers.type, phoneNumbers.role, phoneNumber.value);
-            addState(contactId + '.phoneNumber.' + i + '.type', phoneNumbers.name, phoneNumbers.type, phoneNumbers.role, phoneNumber.type);
-            contactJsonNumbers.push({value: phoneNumber.value});
+            addState(contactId + '.phoneNumber.' + i + '.value', phoneNumbers.name, phoneNumbers.type, phoneNumbers.role, (phoneNumber.value || ''));
+            addState(contactId + '.phoneNumber.' + i + '.type', phoneNumbers.name, phoneNumbers.type, phoneNumbers.role, (phoneNumber.type || ''));
+            contactJsonNumbers.push({value: (phoneNumber.value || '')});
         }
     } else removeChannel(contactId + '.phoneNumber');
     contactJson.phoneNumbers = contactJsonNumbers;
@@ -537,8 +547,8 @@ function addGoogleContact(contact) {
             
             const emailAddress = contact.emailAddresses[i];
             
-            addState(contactId + '.emailAddress.' + i + '.value', emailAddresses.name, emailAddresses.type, emailAddresses.role, emailAddress.value);
-            addState(contactId + '.emailAddress.' + i + '.type', emailAddresses.name, emailAddresses.type, emailAddresses.role, emailAddress.type);
+            addState(contactId + '.emailAddress.' + i + '.value', emailAddresses.name, emailAddresses.type, emailAddresses.role, (emailAddress.value || ''));
+            addState(contactId + '.emailAddress.' + i + '.type', emailAddresses.name, emailAddresses.type, emailAddresses.role, (emailAddress.type || ''));
         }
     } else removeChannel(contactId + '.emailAddress');
 
@@ -597,7 +607,7 @@ function getGoogleContacts(account, auth, index, nextPageToken = '', connections
         cal.people.connections.list({
             resourceName: 'people/me',
             pageToken: nextPageToken,
-            personFields: 'names,emailAddresses,photos,phoneNumbers,addresses',
+            personFields: 'names,emailAddresses,photos,phoneNumbers,addresses,organizations',
         }, (err, res) => {
             if (err) return adapter.log.info('The API returned an error: ' + err);
             if(res) {
