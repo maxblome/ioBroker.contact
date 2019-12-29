@@ -475,8 +475,6 @@ function addGoogleContact(contact) {
 
     const contactId = contact.names[0].metadata.source.id;
 
-    adapter.log.warn(JSON.stringify(contact));
-
     //Add contact channel
     addChannel(contactId, (contact.names[0].displayNameLastFirst || ''));
     contactJson.id = contactId;
