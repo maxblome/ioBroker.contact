@@ -79,6 +79,12 @@ Go to the adapter config an add the client ID and the client secret.
 
 ## Changelog
 
+### 1.0.1 (2019-12-29)
+* (WLAN-Kabel) Fixed problem with companies in google contacts
+* (WLAN-Kabel) Removed 'undefined' from fullName if one name is missing
+* (WLAN-Kabel) Adapter no longer hangs on the schedule
+* (WLAN-Kabel) Nextcloud default password changed because the old password caused messages
+
 ### 1.0.0 (2019-12-23)
 * (WLAN-Kabel) Added Nextcloud contacts
 * (WLAN-Kabel) Added state fullName to query and each contact

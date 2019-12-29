@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "contact",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "news": {
+            "1.0.1": {
+                "en": "Fixed problem with companies in google contacts\nRemoved undefined from fullName if one name is missing\nAdapter no longer hangs on the schedule\nNextcloud default password changed because the old password caused messages",
+                "de": "Problem mit Unternehmen in Google-Kontakten behoben.\nUnbestimmt von fullName entfernt, wenn ein Name fehlt.\nAdapter hängt nicht mehr am Zeitplan.\nNextcloud-Standardkennwort geändert, da das alte Kennwort Nachrichten verursachte",
+                "ru": "Исправлена проблема с компаниями в контактах google.\nУдалите неопределенное из полного имени, если отсутствует одно имя\nАдаптер больше не зависает в расписании\nСледующий пароль по умолчанию изменен, поскольку старый пароль вызывал сообщения",
+                "pt": "Corrigido o problema com empresas nos contatos do Google\nRemovido indefinido de fullName se um nome estiver ausente\nO adaptador não trava mais no agendamento\nA senha padrão do Nextcloud foi alterada porque a senha antiga causou mensagens",
+                "nl": "Probleem opgelost met bedrijven in Google-contacten\nVerwijderd ongedefinieerd van fullName als een naam ontbreekt\nAdapter hangt niet langer aan het schema\nVolgende standaardwachtwoord gewijzigd omdat het oude wachtwoord berichten veroorzaakte",
+                "fr": "Correction d'un problème avec les entreprises dans les contacts google\nSupprimé non défini de fullName si un nom est manquant\nAdapter ne se bloque plus sur la planification\nLe mot de passe par défaut de Nextcloud a été modifié car l'ancien mot de passe provoquait des messages",
+                "it": "Risolto il problema con le aziende nei contatti di Google\nRimosso non definito da fullName se manca un nome\nAdapter non si blocca più nella pianificazione\nLa password predefinita di Nextcloud è cambiata perché la vecchia password causava messaggi",
+                "es": "Se corrigió el problema con las empresas en los contactos de google\nSe eliminó indefinido de fullName si faltaba un nombre\nAdapter ya no se cuelga en la programación\nSe cambió la contraseña predeterminada de Nextcloud porque la contraseña anterior causaba mensajes",
+                "pl": "Naprawiono problem z firmami w kontaktach Google\nUsunięto niezdefiniowany z fullName, jeśli brakuje jednej nazwy\nAdapter nie zawiesza się już w harmonogramie\nNextcloud domyślne hasło zostało zmienione, ponieważ stare hasło powodowało wiadomości",
+                "zh-cn": "修复了Google联系人中公司的问题\n如果缺少一个名称，则将其从fullName中删除未定义\n适配器不再挂在日程表上\nNextcloud默认密码已更改，因为旧密码导致出现了消息"
+            },
             "1.0.0": {
                 "en": "Added Nextcloud contacts\nAdded state fullName to query and each contact\nFQDN and interval moved to main tab\nChanged channel name for addresses, emailAddresses and phoneNumbers\nAdded type state for emailAddresses and phoneNumbers",
                 "de": "Nextcloud-Kontakte hinzugefügt\nZustand fullName zur Abfrage hinzugefügt und jeder Kontakt\nFQDN und Intervall auf Hauptregisterkarte verschoben\nChanged-Kanalname für Adressen, E-Mail-Adressen und Telefonnummern\nZustand für E-Mail-Adressen und Telefonnummern hinzugefügt",
