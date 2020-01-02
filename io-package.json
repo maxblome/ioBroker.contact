@@ -107,6 +107,7 @@
         "readme": "https://github.com/WLAN-Kabel/ioBroker.contact/blob/master/README.md",
         "loglevel": "info",
         "mode": "daemon",
+        "messagebox": true,
         "type": "misc-data",
         "compact": true,
         "materialize": true,
