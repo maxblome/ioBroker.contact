@@ -149,8 +149,6 @@ class Contact extends utils.Adapter {
       */
     onMessage(obj) {
 
-        adapter.log.info('SEND TO');
-
         const result = {};
 
         if (typeof obj === 'object' && obj.message) {
@@ -257,10 +255,12 @@ async function startRemoveScheduler(config) {
                 removeUnused(channels, contacts);
             });
             
+            googleContactsLoaded = false;
+            nextcloudContactsLoaded = false;
             wait = false;
         }
 
-        await sleep(500);
+        await sleep(1000);
     } while(wait);
 }
 
@@ -547,7 +547,7 @@ function addGoogleContact(contact) {
             
             const address = contact.addresses[i];
 
-            addState(contactId + '.address.' + i + '.streetAddress', streetAddress.name, streetAddress.type, (streetAddress.role, address.streetAddress || ''));
+            addState(contactId + '.address.' + i + '.streetAddress', streetAddress.name, streetAddress.type, streetAddress.role, (address.streetAddress || ''));
             addState(contactId + '.address.' + i + '.city', city.name, city.type, city.role, (address.city || ''));
             addState(contactId + '.address.' + i + '.postalCode', postalCode.name, postalCode.type, postalCode.role, (address.postalCode || ''));
             addState(contactId + '.address.' + i + '.country', country.name, country.type, country.role, (address.country || ''));
