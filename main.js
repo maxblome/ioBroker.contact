@@ -53,6 +53,7 @@ class Contact extends utils.Adapter {
         this.on('objectChange', this.onObjectChange.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
         this.on('unload', this.onUnload.bind(this));
+        this.on('message', this.onMessage.bind(this));
     }
 
     async onReady() {
@@ -136,10 +137,55 @@ class Contact extends utils.Adapter {
             if(state) {
                 if(state.ack == false) {
                     const number = state.val;
-                    queryContactByPhoneNumber(number);
+                    queryViaState(number);
                 }
             }
         }
+    }
+
+    /** Some message was sent to this instance over message box. Used by email, pushover, text2speech, ...
+      * Using this method requires "common.message" property to be set to true in io-package.json
+      * @param {ioBroker.Message} obj
+      */
+    onMessage(obj) {
+
+        const result = {};
+
+        if (typeof obj === 'object' && obj.message) {
+            if (obj.command === 'query') {
+                if(obj.message.phonenumber) {
+
+                    const contact = queryContactByPhoneNumber(obj.message.phonenumber);
+                    
+                    if(contact) {
+                        result.contact = contact;
+                    } else {
+                        result.contact = {};
+                    }
+                } else result.error = `No phonenumber defined`;
+            } else result.error = `Command ${obj.command} are not supported.`;
+        } else result.error = `No message defined.`;
+
+        if (obj.callback) this.sendTo(obj.from, obj.command, result, obj.callback);
+    }
+}
+
+function queryViaState(number) {
+
+    addState('familyName', 'Queried family name', 'string', 'contact.familyName', '');
+    addState('givenName', 'Queried given name', 'string', 'contact.givenName', '');
+    addState('fullName', 'Queried full name', 'string', 'contact.fullName', '');
+    addState('photo', 'Queried photo', 'string', 'contact.photo', '');
+    addState('id', 'Queried id', 'string', 'contact.id', '');
+
+    const result = queryContactByPhoneNumber(number);
+
+    if(result) {
+        addState('familyName', 'Queried family name', 'string', 'contact.familyName', result.familyName);
+        addState('givenName', 'Queried given name', 'string', 'contact.givenName', result.givenName);
+        addState('fullName', 'Queried full name', 'string', 'contact.fullName', result.fullName);
+        addState('photo', 'Queried photo', 'string', 'contact.photo', result.photo);
+        addState('id', 'Queried id', 'string', 'contact.id', result.id);
     }
 }
 
@@ -149,12 +195,6 @@ function queryContactByPhoneNumber(number) {
 
     adapter.log.debug('Queried phonenumber: ' + number);
 
-    addState('familyName', 'Queried family name', 'string', 'contact.familyName', '');
-    addState('givenName', 'Queried given name', 'string', 'contact.givenName', '');
-    addState('fullName', 'Queried full name', 'string', 'contact.fullName', '');
-    addState('photo', 'Queried photo', 'string', 'contact.photo', '');
-    addState('id', 'Queried id', 'string', 'contact.id', '');
-
     for(let i = 0; i < contacts.length; i++) {
         for(let j = 0; j < contacts[i].phoneNumbers.length; j++) {
 
@@ -163,16 +203,13 @@ function queryContactByPhoneNumber(number) {
             adapter.log.debug('Compared phonenumber: ' + tmpNumber);
 
             if(tmpNumber == number) {
-                addState('familyName', 'Queried family name', 'string', 'contact.familyName', contacts[i].familyName);
-                addState('givenName', 'Queried given name', 'string', 'contact.givenName', contacts[i].givenName);
-                addState('fullName', 'Queried full name', 'string', 'contact.fullName', contacts[i].fullName);
-                addState('photo', 'Queried photo', 'string', 'contact.photo', contacts[i].photo);
-                addState('id', 'Queried id', 'string', 'contact.id', contacts[i].id);
 
-                return;
+                return contacts[i];
             }
         }
     }
+
+    return null;
 }
 
 function cleanPhoneNumber(number) {
@@ -218,10 +255,12 @@ async function startRemoveScheduler(config) {
                 removeUnused(channels, contacts);
             });
             
+            googleContactsLoaded = false;
+            nextcloudContactsLoaded = false;
             wait = false;
         }
 
-        await sleep(500);
+        await sleep(1000);
     } while(wait);
 }
 
@@ -508,7 +547,7 @@ function addGoogleContact(contact) {
             
             const address = contact.addresses[i];
 
-            addState(contactId + '.address.' + i + '.streetAddress', streetAddress.name, streetAddress.type, (streetAddress.role, address.streetAddress || ''));
+            addState(contactId + '.address.' + i + '.streetAddress', streetAddress.name, streetAddress.type, streetAddress.role, (address.streetAddress || ''));
             addState(contactId + '.address.' + i + '.city', city.name, city.type, city.role, (address.city || ''));
             addState(contactId + '.address.' + i + '.postalCode', postalCode.name, postalCode.type, postalCode.role, (address.postalCode || ''));
             addState(contactId + '.address.' + i + '.country', country.name, country.type, country.role, (address.country || ''));

@@ -1,11 +1,23 @@
 {
     "common": {
         "name": "contact",
-        "version": "1.0.1",
+        "version": "1.1.0",
         "news": {
+            "1.1.0": {
+                "en": "sendTo() is now supported\nFixed issue where roads are being written into the roll\nFixed issue where contacts are deleted when refreshed",
+                "de": "sendTo() wird jetzt unterstützt.\nProblem behoben, bei dem Straßen in die Rolle geschrieben werden.\nProblem behoben, bei dem Kontakte beim Aktualisieren gelöscht werden",
+                "ru": "sendTo() теперь поддерживается\nИсправлена проблема, при которой дороги записываются в рулон\nИсправлена проблема, при которой контакты удаляются при обновлении.",
+                "pt": "sendTo() agora é suportado\nFixo corrigido em que as estradas estão sendo gravadas no rolo\nFixo corrigido em que os contatos são excluídos quando atualizados",
+                "nl": "sendTo() wordt nu ondersteund\nVast probleem waarbij wegen in de rol worden geschreven\nVast probleem waarbij contacten worden verwijderd wanneer ze worden vernieuwd",
+                "fr": "sendTo() est maintenant pris en charge\nFixed issue where routes are being writing into the roll\nFixed issue where contacts are supprimé when refreshed refresh",
+                "it": "sendTo() è ora supportato\nRisolto problema in cui le strade venivano scritte nel rotolo\nRisolto problema in cui i contatti venivano eliminati quando aggiornati",
+                "es": "sendTo() ahora es compatible\nProblema fijo donde las carreteras se escriben en el rollo\nProblema fijo donde los contactos se eliminan cuando se actualizan",
+                "pl": "funkcja sendTo() jest teraz obsługiwana\nNaprawiony problem polegający na zapisywaniu dróg w rolce\nNaprawiony problem polegający na usuwaniu kontaktów po odświeżeniu",
+                "zh-cn": "现在支持sendTo（）\n已修复将道路写入路段的问题\n已修复了刷新时删除联系人的问题"
+            },
             "1.0.1": {
                 "en": "Fixed problem with companies in google contacts\nRemoved undefined from fullName if one name is missing\nAdapter no longer hangs on the schedule\nNextcloud default password changed because the old password caused messages",
-                "de": "Problem mit Unternehmen in Google-Kontakten behoben.\nUnbestimmt von fullName entfernt, wenn ein Name fehlt.\nAdapter hängt nicht mehr am Zeitplan.\nNextcloud-Standardkennwort geändert, da das alte Kennwort Nachrichten verursachte",
+                "de": "Problem mit Unternehmen in Google-Kontakten behoben.\nundefined von fullName entfernt, wenn ein Name fehlt.\nAdapter hängt sich nicht mehr beim Aktualisieren auf.\nNextcloud-Standardkennwort geändert, da das alte Kennwort Nachrichten verursachte",
                 "ru": "Исправлена проблема с компаниями в контактах google.\nУдалите неопределенное из полного имени, если отсутствует одно имя\nАдаптер больше не зависает в расписании\nСледующий пароль по умолчанию изменен, поскольку старый пароль вызывал сообщения",
                 "pt": "Corrigido o problema com empresas nos contatos do Google\nRemovido indefinido de fullName se um nome estiver ausente\nO adaptador não trava mais no agendamento\nA senha padrão do Nextcloud foi alterada porque a senha antiga causou mensagens",
                 "nl": "Probleem opgelost met bedrijven in Google-contacten\nVerwijderd ongedefinieerd van fullName als een naam ontbreekt\nAdapter hangt niet langer aan het schema\nVolgende standaardwachtwoord gewijzigd omdat het oude wachtwoord berichten veroorzaakte",
@@ -17,7 +29,7 @@
             },
             "1.0.0": {
                 "en": "Added Nextcloud contacts\nAdded state fullName to query and each contact\nFQDN and interval moved to main tab\nChanged channel name for addresses, emailAddresses and phoneNumbers\nAdded type state for emailAddresses and phoneNumbers",
-                "de": "Nextcloud-Kontakte hinzugefügt\nZustand fullName zur Abfrage hinzugefügt und jeder Kontakt\nFQDN und Intervall auf Hauptregisterkarte verschoben\nChanged-Kanalname für Adressen, E-Mail-Adressen und Telefonnummern\nZustand für E-Mail-Adressen und Telefonnummern hinzugefügt",
+                "de": "Nextcloud-Kontakte hinzugefügt\nState fullName zur Abfrage und zu jedem Kontakt hinzugefügt\nFQDN und Intervall auf die Hauptregisterkarte verschoben\nChannelname für Adressen, E-Mail-Adressen und Telefonnummern geändert\nTypen-State für E-Mail-Adressen und Telefonnummern hinzugefügt",
                 "ru": "Добавлены контакты Nextcloud\nДобавлено состояние fullName для запроса, и каждый контакт\nFQDN и интервал перемещены на главную вкладку\nИзмененное имя канала для адресов, адресов электронной почты и номеров телефонов\nСостояние добавленного типа для адресов электронной почты адресов и номеров телефонов",
                 "pt": "Adicionados contatos Nextcloud\nAdicionado estado fullName para consulta e cada contato\nFQDN e intervalo foram movidos para a guia principal\nNome do canal alterado para endereços, emailAddresses e phoneNumbers\nEstado de tipo adicionado para emailAddresses e phoneNumbers",
                 "nl": "Nextcloud-contacten toegevoegd\nToestand volledige naam toegevoegd aan zoekopdracht en elk contact\nFQDN en interval verplaatst naar hoofdtabblad\nVeranderde kanaalnaam voor adressen, e-mailAdressen en telefoonnummers\nType toegevoegd voor e-mailAdressen en telefoonnummers",
@@ -107,6 +119,7 @@
         "readme": "https://github.com/WLAN-Kabel/ioBroker.contact/blob/master/README.md",
         "loglevel": "info",
         "mode": "daemon",
+        "messagebox": true,
         "type": "misc-data",
         "compact": true,
         "materialize": true,
