@@ -79,6 +79,11 @@ Go to the adapter config an add the client ID and the client secret.
 
 ## Changelog
 
+### 1.1.0 (2020-01-05)
+* (WLAN-Kabel) sendTo() is now supported
+* (WLAN-Kabel) Fixed issue where roads are being written into the roll
+* (WLAN-Kabel) Fixed issue where contacts are deleted when refreshed
+
 ### 1.0.1 (2019-12-29)
 * (WLAN-Kabel) Fixed problem with companies in google contacts
 * (WLAN-Kabel) Removed 'undefined' from fullName if one name is missing
