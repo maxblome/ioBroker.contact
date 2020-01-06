@@ -77,7 +77,32 @@ Go to the adapter config an add the client ID and the client secret.
 | emailAddresses.* | Email adresses of the contact |
 | phoneNumbers.* | Phone numbers of the contact |
 
+## Javascript
+
+A request can be sent to the adapter via ```sendTo()```, as does the query data point, but you get back a JSON object that can be processed in a script (was already used: https://forum.iobroker.net/topic/28294/asynchron-callback-promise-await-hilfe.
+
+```js
+sendTo('contact.0', 'query', {phonenumberr: '+49 1234 567890'}, (obj) => {
+
+    if(obj.error) {
+
+        log(obj.error);
+
+    } else {
+
+        log(JSON.stringify(obj.contact));
+
+    }
+
+});
+```
+
 ## Changelog
+
+### 1.1.1 (2020-01-06)
+* (WLAN-Kabel) Cron job will stopped on unload
+* (WLAN-Kabel) Fixed an issue where not all states were deleted
+* (WLAN-Kabel) Added some debug messages
 
 ### 1.1.0 (2020-01-05)
 * (WLAN-Kabel) sendTo() is now supported
@@ -110,7 +135,7 @@ Go to the adapter config an add the client ID and the client secret.
 ## License
 MIT License
 
-Copyright (c) 2019 WLAN-Kabel <wlan-kabel@outlook.de>
+Copyright (c) 2019-2020 WLAN-Kabel <wlan-kabel@outlook.de>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

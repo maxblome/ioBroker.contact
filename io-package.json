@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "contact",
-        "version": "1.1.0",
+        "version": "1.1.1",
         "news": {
+            "1.1.1": {
+                "en": "Cron job will stopped on unload\nFixed an issue where not all states were deleted\nAdded some debug messages",
+                "de": "Cron-Job wird beim Unload gestoppt.\nEin Problem wurde behoben, bei dem nicht alle States gelöscht wurden.\nEinige Debug-Meldungen wurden hinzugefügt",
+                "ru": "Задание Cron будет остановлено при выгрузке\nИсправлена проблема, при которой не все состояния были удалены\nДобавлены некоторые отладочные сообщения",
+                "pt": "O trabalho de criação foi interrompido ao descarregar\nFixou um problema em que nem todos os estados foram excluídos\nAdicionou algumas mensagens de depuração",
+                "nl": "Cron-taak wordt gestopt bij verwijderen\nEen probleem opgelost waarbij niet alle toestanden werden verwijderd\n Enkele foutopsporingsberichten toegevoegd",
+                "fr": "Le travail Cron sera arrêté lors du déchargement\nFixé un problème où tous les états n'étaient pas supprimés\nAjout de certains messages de débogage",
+                "it": "Cron job verrà interrotto allo scaricamento\nRisolto un problema in cui non tutti gli stati venivano eliminati\nAggiunti alcuni messaggi di debug",
+                "es": "El trabajo de Cron se detendrá al descargar\nSe solucionó un problema por el que no todos los estados se eliminaron\nAñadió algunos mensajes de depuración",
+                "pl": "Zadanie Crona zostanie zatrzymane przy rozładowaniu\nNaprawiono problem polegający na tym, że nie wszystkie stany zostały usunięte\nDodano niektóre komunikaty debugowania",
+                "zh-cn": "Cron作业将在卸载时停止\n修复了并非所有状态都被删除的问题\n添加了一些调试消息"
+            },
             "1.1.0": {
                 "en": "sendTo() is now supported\nFixed issue where roads are being written into the roll\nFixed issue where contacts are deleted when refreshed",
                 "de": "sendTo() wird jetzt unterstützt.\nProblem behoben, bei dem Straßen in die Rolle geschrieben werden.\nProblem behoben, bei dem Kontakte beim Aktualisieren gelöscht werden",
@@ -90,16 +102,16 @@
             "zh-cn": "联系"
         },
         "desc": {
-            "en": "Connect to your google contacts",
-            "de": "Stellen Sie eine Verbindung zu Ihren Google-Kontakten her",
-            "ru": "Подключитесь к своим контактам Google",
-            "pt": "Conecte-se aos seus contatos do google",
-            "nl": "Maak verbinding met uw Google-contacten",
-            "fr": "Connectez-vous à vos contacts Google",
-            "it": "Collegati ai tuoi contatti Google",
-            "es": "Conéctate a tus contactos de google",
-            "pl": "Połącz się z kontaktami Google",
-            "zh-cn": "连接到您的Google联系人"
+            "en": "Connect to your google and nextcloud contacts",
+            "de": "Stellen Sie eine Verbindung zu Ihren Google- und NextCloud-Kontakten her",
+            "ru": "Подключитесь к своим контактам в Google и NextCloud",
+            "pt": "Conecte-se aos seus contatos do google e nextcloud",
+            "nl": "Maak verbinding met uw google- en nextcloud-contacten",
+            "fr": "Connectez-vous à vos contacts google et nextcloud",
+            "it": "Collegati ai tuoi contatti google e nextcloud",
+            "es": "Conéctese a sus contactos de google y nextcloud",
+            "pl": "Połącz się z kontaktami google i nextcloud",
+            "zh-cn": "连接到您的Google和nextcloud联系人"
         },
         "authors": [
             "WLAN-Kabel wlan-kabel@outlook.de"
