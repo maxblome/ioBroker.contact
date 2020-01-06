@@ -15,6 +15,7 @@ const cron = require('node-cron');
 const {google} = require('googleapis');
 const vcard = require('./lib/vcard');
 const nextcloud = require('./lib/nextcloud');
+let cronJob;
 
 let adapter;
 
@@ -65,6 +66,18 @@ class Contact extends utils.Adapter {
             };
         }
 
+        if(!String.prototype.endsWith) {
+            String.prototype.endsWith = function(searchString, position) {
+                const subjectString = this.toString();
+                if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+                    position = subjectString.length;
+                }
+                position -= searchString.length;
+                const lastIndex = subjectString.indexOf(searchString, position);
+                return lastIndex !== -1 && lastIndex === position;
+            };
+        }
+
         if(this.config.googleActive) {
             oauth2 = getGoogleAuthentication(adapter.config);
 
@@ -105,6 +118,11 @@ class Contact extends utils.Adapter {
     onUnload(callback) {
         try {
             //this.log.info('cleaned everything up...');
+            if(cronJob) {
+                cronJob.stop();
+                adapter.log.debug('Cron job stopped');
+            }
+
             callback();
         } catch (e) {
             callback();
@@ -291,7 +309,7 @@ function startSchedule(config, auth) {
         cronInterval += 12 + ' * * *';
     }
 
-    cron.schedule(cronInterval, () => {
+    cronJob = cron.schedule(cronInterval, () => {
 
         contacts = [];
         
@@ -383,8 +401,14 @@ function removeUnused(oldList, newList) {
         }
 
         if(inNewList == false) {
-            adapter.log.warn(oldList[i]._id);
-            adapter.deleteChannel(oldList[i]._id);
+            adapter.log.debug(`Delete channel => ${oldList[i]._id}`);
+            adapter.delObject(oldList[i]._id);
+            adapter.getStates(oldList[i]._id + '*', (err, states) => {
+                for (let id in states) {
+                    adapter.log.debug(`Delete state => ${id}`);
+                    adapter.delObject(id);
+                }
+            });
         }
     }
 }
@@ -394,8 +418,15 @@ function removeChannel(id) {
     adapter.getChannels(function (err, channels) {
 
         for(let i = 0; i < channels.length; i++) {
-            if(id == channels[i]._id) {
-                adapter.deleteChannel(id);
+            if(channels[i]._id.endsWith(id)) {
+                adapter.log.debug(`Delete channel => ${channels[i]._id}`);
+                adapter.delObject(channels[i]._id);
+                adapter.getStates(channels[i]._id + '*', (err, states) => {
+                    for (let id in states) {
+                        adapter.log.debug(`Delete state => ${id}`);
+                        adapter.delObject(id);
+                    }
+                });
             }
         }
     });
@@ -408,6 +439,8 @@ function addChannel(id, name) {
             name: name,
         },
         native: {},
+    }).then((prom) => {
+        if(prom) adapter.log.debug('Channel added => ' + prom.id);
     });
 }
 
@@ -422,6 +455,8 @@ function addState(id, name, type, role, value = null) {
             write: false
         },
         native: {},
+    }).then((prom) => {
+        if(prom) adapter.log.debug('State added => ' + prom.id);
     });
     
     adapter.setStateAsync(id, { val: (value || ''), ack: true });
