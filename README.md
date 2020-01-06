@@ -94,7 +94,8 @@ sendTo('contact.0', 'query', {phonenumberr: '+49 1234 567890'}, (obj) => {
 
     }
 
-});```
+});
+```
 
 ## Changelog
 
