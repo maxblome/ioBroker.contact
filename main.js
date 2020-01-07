@@ -16,6 +16,7 @@ const {google} = require('googleapis');
 const vcard = require('./lib/vcard');
 const nextcloud = require('./lib/nextcloud');
 let cronJob;
+let server;
 
 let adapter;
 
@@ -82,7 +83,7 @@ class Contact extends utils.Adapter {
             oauth2 = getGoogleAuthentication(adapter.config);
 
             if(hasAccountWithoutGrantPermission(adapter.config)) {
-                initServer(adapter.config);
+                server = initServer(adapter.config);
             }
         }
         
@@ -121,6 +122,11 @@ class Contact extends utils.Adapter {
             if(cronJob) {
                 cronJob.stop();
                 adapter.log.debug('Cron job stopped');
+            }
+
+            if(server) {
+                server.server.close();
+                adapter.log.debug('Server stopped');
             }
 
             callback();
