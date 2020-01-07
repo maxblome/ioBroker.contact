@@ -135,8 +135,6 @@
         "type": "misc-data",
         "compact": true,
         "materialize": true,
-        "materializeTab": true,
-        "supportCustoms": true,
         "dependencies": [
             {
                 "js-controller": ">=1.4.2"
