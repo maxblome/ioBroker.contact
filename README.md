@@ -99,6 +99,10 @@ sendTo('contact.0', 'query', {phonenumberr: '+49 1234 567890'}, (obj) => {
 
 ## Changelog
 
+### 1.1.2 (2020-01-07)
+* (WLAN-Kabel) Server will stopped on unload
+* (WLAN-Kabel) Removed adapter from state settings
+
 ### 1.1.1 (2020-01-06)
 * (WLAN-Kabel) Cron job will stopped on unload
 * (WLAN-Kabel) Fixed an issue where not all states were deleted
