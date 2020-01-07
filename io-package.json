@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "contact",
-        "version": "1.1.1",
+        "version": "1.1.2",
         "news": {
+            "1.1.2": {
+                "en": "Server will stopped on unload\nRemoved adapter from state settings",
+                "de": "Der Server wird beim Entladen gestoppt.\nAdapter aus den Stateeinstellungen entfernt",
+                "ru": "Сервер будет остановлен при выгрузке\nУдален адаптер из настроек состояния",
+                "pt": "O servidor será parado ao descarregar\nAdaptador removido das configurações de estado",
+                "nl": "Server stopt bij verwijderen\nAdapter verwijderd uit statusinstellingen",
+                "fr": "Le serveur sera arrêté lors du déchargement\nAdaptateur supprimé des paramètres d'état",
+                "it": "Il server verrà arrestato allo scaricamento\nAdattatore rimosso dalle impostazioni dello stato",
+                "es": "El servidor se detendrá al descargar\nEl adaptador eliminado de la configuración de estado",
+                "pl": "Serwer zatrzyma się po zwolnieniu\nUsunięto adapter z ustawień stanu",
+                "zh-cn": "服务器将在卸载时停止\n从状态设置中删除了适配器"
+            },
             "1.1.1": {
                 "en": "Cron job will stopped on unload\nFixed an issue where not all states were deleted\nAdded some debug messages",
                 "de": "Cron-Job wird beim Unload gestoppt.\nEin Problem wurde behoben, bei dem nicht alle States gelöscht wurden.\nEinige Debug-Meldungen wurden hinzugefügt",
@@ -135,8 +147,6 @@
         "type": "misc-data",
         "compact": true,
         "materialize": true,
-        "materializeTab": true,
-        "supportCustoms": true,
         "dependencies": [
             {
                 "js-controller": ">=1.4.2"
