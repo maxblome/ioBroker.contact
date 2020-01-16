@@ -33,3 +33,8 @@ www_old/
 .git/
 .github/
 main.test.js
+tsconfig.json
+admin/admin.d.ts
+admin/tsconfig.json
+
+lib/adapter-config.d.ts
