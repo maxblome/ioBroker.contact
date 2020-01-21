@@ -94,7 +94,7 @@ class Contact extends utils.Adapter {
             common: {
                 name: 'Query phone number',
                 type: 'string',
-                role: 'contact.query',
+                role: 'text',
                 read: true,
                 write: true
             },
@@ -102,11 +102,11 @@ class Contact extends utils.Adapter {
         });
         //adapter.setStateAsync('query', { val: '', ack: true });
 
-        addState('familyName', 'Queried family name', 'string', 'contact.familyName');
-        addState('givenName', 'Queried given name', 'string', 'contact.givenName');
-        addState('fullName', 'Queried full name', 'string', 'contact.fullName');
-        addState('photo', 'Queried photo', 'string', 'contact.photo');
-        addState('id', 'Queried id', 'string', 'contact.id');
+        addState('familyName', 'Queried family name', 'string', 'text');
+        addState('givenName', 'Queried given name', 'string', 'text');
+        addState('fullName', 'Queried full name', 'string', 'text');
+        addState('photo', 'Queried photo', 'string', 'text.url');
+        addState('id', 'Queried id', 'string', 'text');
 
         // in this template all states changes inside the adapters namespace are subscribed
         this.subscribeStates('*');
@@ -196,20 +196,20 @@ class Contact extends utils.Adapter {
 
 function queryViaState(number) {
 
-    addState('familyName', 'Queried family name', 'string', 'contact.familyName', '');
-    addState('givenName', 'Queried given name', 'string', 'contact.givenName', '');
-    addState('fullName', 'Queried full name', 'string', 'contact.fullName', '');
-    addState('photo', 'Queried photo', 'string', 'contact.photo', '');
-    addState('id', 'Queried id', 'string', 'contact.id', '');
+    addState('familyName', 'Queried family name', 'string', 'text', '');
+    addState('givenName', 'Queried given name', 'string', 'text', '');
+    addState('fullName', 'Queried full name', 'string', 'text', '');
+    addState('photo', 'Queried photo', 'string', 'text.url', '');
+    addState('id', 'Queried id', 'string', 'text', '');
 
     const result = queryContactByPhoneNumber(number);
 
     if(result) {
-        addState('familyName', 'Queried family name', 'string', 'contact.familyName', result.familyName);
-        addState('givenName', 'Queried given name', 'string', 'contact.givenName', result.givenName);
-        addState('fullName', 'Queried full name', 'string', 'contact.fullName', result.fullName);
-        addState('photo', 'Queried photo', 'string', 'contact.photo', result.photo);
-        addState('id', 'Queried id', 'string', 'contact.id', result.id);
+        addState('familyName', 'Queried family name', 'string', 'text', result.familyName);
+        addState('givenName', 'Queried given name', 'string', 'text', result.givenName);
+        addState('fullName', 'Queried full name', 'string', 'text', result.fullName);
+        addState('photo', 'Queried photo', 'string', 'text.url', result.photo);
+        addState('id', 'Queried id', 'string', 'ctext', result.id);
     }
 }
 
