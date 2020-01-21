@@ -813,6 +813,9 @@ function initServer(settings) {
         }
         
         server.server = http.createServer(server.app);
+        server.server.on('error', (err) => {
+            adapter.log.error(err);
+        });
     } else {
         adapter.log.error('Port is missing');
     }
