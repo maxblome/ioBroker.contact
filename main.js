@@ -671,7 +671,7 @@ function getGoogleContacts(account, auth, index, nextPageToken = '', connections
             pageToken: nextPageToken,
             personFields: 'names,emailAddresses,photos,phoneNumbers,addresses,organizations',
         }, (err, res) => {
-            if (err) return adapter.log.info('The API returned an error: ' + err);
+            if (err) return adapter.log.error('The API returned an error: ' + err);
             if(res) {
 
                 const tmpCon = [
