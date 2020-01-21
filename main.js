@@ -24,16 +24,16 @@ let oauth2;
 const googleScope = 'https://www.googleapis.com/auth/contacts.readonly';
 
 const objectCommon = {
-    familyName:     {name: 'Family Name',       type: 'string',     role: 'contact.familyName'},
-    givenName:      {name: 'Given Name',        type: 'string',     role: 'contact.givenName'},
-    fullName:       {name: 'Full Name',         type: 'string',     role: 'contact.fullName'},
-    photo:          {name: 'Photo',             type: 'string',     role: 'contact.photo'},
-    streetAddress:  {name: 'Street Address',    type: 'string',     role: 'contact.streetAddress'},
-    city:           {name: 'City',              type: 'string',     role: 'contact.city'},
-    postalCode:     {name: 'Postal Code',       type: 'string',     role: 'contact.postalCode'},
-    country:        {name: 'Country',           type: 'string',     role: 'contact.country'},
-    emailAddresses: {name: 'Email Addresses',   type: 'string',     role: 'contact.emailAddresses'},
-    phoneNumbers:   {name: 'Phone Numbers',     type: 'string',     role: 'contact.phoneNumbers'}
+    familyName:     {name: 'Family Name',       type: 'string',     role: 'text'},
+    givenName:      {name: 'Given Name',        type: 'string',     role: 'text'},
+    fullName:       {name: 'Full Name',         type: 'string',     role: 'text'},
+    photo:          {name: 'Photo',             type: 'string',     role: 'text.url'},
+    streetAddress:  {name: 'Street Address',    type: 'string',     role: 'text'},
+    city:           {name: 'City',              type: 'string',     role: 'text'},
+    postalCode:     {name: 'Postal Code',       type: 'string',     role: 'text'},
+    country:        {name: 'Country',           type: 'string',     role: 'text'},
+    emailAddresses: {name: 'Email Addresses',   type: 'string',     role: 'text'},
+    phoneNumbers:   {name: 'Phone Numbers',     type: 'string',     role: 'text'}
 };
 
 let contacts = [];
