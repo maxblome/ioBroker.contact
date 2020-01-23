@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "contact",
-        "version": "1.1.2",
+        "version": "1.1.3",
         "news": {
+            "1.1.3": {
+                "en": "The roles have been changed to official once\nFixed deprecation of Buffer\nAdded error handler for http server",
+                "de": "Die Rollen wurden Offizielle geändert\nDeprecation von Buffer behoben\nFehlerbehandlungsroutine für http-Server hinzugefügt",
+                "ru": "Роли были изменены на официальные один раз\nИсправлено устаревание буфера\nДобавлен обработчик ошибок для http-сервера",
+                "pt": "Os papéis foram alterados para oficiais uma vez\nReprovação corrigida do buffer\nAdicionado manipulador de erros para o servidor http",
+                "nl": "De rollen zijn eenmaal gewijzigd in officieel\nVaste afschrijving van buffer\nFouthandler toegevoegd voor http-server",
+                "fr": "Les rôles sont devenus officiels une fois\nCorrection de la dépréciation de Buffer\nGestionnaire d'erreurs ajouté pour le serveur http",
+                "it": "I ruoli sono stati cambiati in ufficiali una volta\nCorretto l'ammortamento del buffer\nAggiunto gestore degli errori per il server http",
+                "es": "Los roles se han cambiado a oficial una vez\nDesaprobación fija de Buffer\nSe agregó un controlador de errores para el servidor http",
+                "pl": "Role zostały raz zmienione na oficjalne\nNaprawiono wycofanie bufora\nDodano obsługę błędów dla serwera http",
+                "zh-cn": "角色一次更改为正式\n固定弃用缓冲区\n为HTTP服务器添加了错误处理程序"
+            },
             "1.1.2": {
                 "en": "Server will stopped on unload\nRemoved adapter from state settings",
                 "de": "Der Server wird beim Entladen gestoppt.\nAdapter aus den Stateeinstellungen entfernt",
