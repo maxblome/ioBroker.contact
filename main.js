@@ -99,7 +99,6 @@ class Contact extends utils.Adapter {
             },
             native: {},
         });
-        //adapter.setStateAsync('query', { val: '', ack: true });
 
         addState('familyName', 'Queried family name', 'string', 'text');
         addState('givenName', 'Queried given name', 'string', 'text');
@@ -258,7 +257,7 @@ async function startRemoveScheduler(config) {
         
         if((config.googleActive && googleContactsLoaded || config.googleActive == false) && (config.nextcloudActive && nextcloudContactsLoaded || config.nextcloudActive == false)) {
             
-            adapter.getChannels(function (err, channels) {
+            adapter.getChannels((err, channels) => {
             
                 removeUnused(channels, contacts);
             });
@@ -405,7 +404,7 @@ function removeUnused(oldList, newList) {
 
 function removeChannel(id) {
 
-    adapter.getChannels(function (err, channels) {
+    adapter.getChannels((err, channels) => {
 
         for(let i = 0; i < channels.length; i++) {
             if(channels[i]._id.endsWith(id)) {
@@ -736,7 +735,7 @@ function initServer(settings) {
         };
 
         if(oauth2) {
-            server.app.get('/google/login/:id', function (req, res) {
+            server.app.get('/google/login/:id', (req, res) => {
 
                 const id = req.params.id;
                 
@@ -761,11 +760,11 @@ function initServer(settings) {
                 } else res.send(`Cannot find account ${req.params.id}.`);
             });
 
-            server.app.get('/google/success', function (req, res) {
+            server.app.get('/google/success', (req, res) => {
                 res.send('Done');
             });
 
-            server.app.get('/google', function (req, res) {
+            server.app.get('/google', (req, res) => {
                 if(req.query) {
                     if(req.query.state) {
                         if(req.query.state < settings.google.length && req.query.state >= 0) {
@@ -776,7 +775,7 @@ function initServer(settings) {
                                 for(let i = 0; i < scope.length; i++) {
                                     if(scope[i] == googleScope) {
 
-                                        oauth2.getToken(req.query.code, function(err, tokens) {
+                                        oauth2.getToken(req.query.code, (err, tokens) => {
 
                                             if (err) {
                                                 adapter.log.error(err);
@@ -821,7 +820,7 @@ function initServer(settings) {
     }
 
     if(server && server.server) {
-        adapter.getPort(settings.port, function (port) {
+        adapter.getPort(settings.port, (port) => {
             if (port != settings.port && !adapter.config.findNextPort) {
                 adapter.log.error('Port ' + settings.port + ' already in use');
                 process.exit(1);
