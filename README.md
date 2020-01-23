@@ -99,6 +99,11 @@ sendTo('contact.0', 'query', {phonenumberr: '+49 1234 567890'}, (obj) => {
 
 ## Changelog
 
+### 1.1.3 (2020-01-23)
+* (WLAN-Kabel) The roles have been changed to official once
+* (WLAN-Kabel) Fixed deprecation of Buffer
+* (WLAN-Kabel) Added error handler for http server
+
 ### 1.1.2 (2020-01-07)
 * (WLAN-Kabel) Server will stopped on unload
 * (WLAN-Kabel) Removed adapter from state settings

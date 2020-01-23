@@ -24,16 +24,16 @@ let oauth2;
 const googleScope = 'https://www.googleapis.com/auth/contacts.readonly';
 
 const objectCommon = {
-    familyName:     {name: 'Family Name',       type: 'string',     role: 'contact.familyName'},
-    givenName:      {name: 'Given Name',        type: 'string',     role: 'contact.givenName'},
-    fullName:       {name: 'Full Name',         type: 'string',     role: 'contact.fullName'},
-    photo:          {name: 'Photo',             type: 'string',     role: 'contact.photo'},
-    streetAddress:  {name: 'Street Address',    type: 'string',     role: 'contact.streetAddress'},
-    city:           {name: 'City',              type: 'string',     role: 'contact.city'},
-    postalCode:     {name: 'Postal Code',       type: 'string',     role: 'contact.postalCode'},
-    country:        {name: 'Country',           type: 'string',     role: 'contact.country'},
-    emailAddresses: {name: 'Email Addresses',   type: 'string',     role: 'contact.emailAddresses'},
-    phoneNumbers:   {name: 'Phone Numbers',     type: 'string',     role: 'contact.phoneNumbers'}
+    familyName:     {name: 'Family Name',       type: 'string',     role: 'text'},
+    givenName:      {name: 'Given Name',        type: 'string',     role: 'text'},
+    fullName:       {name: 'Full Name',         type: 'string',     role: 'text'},
+    photo:          {name: 'Photo',             type: 'string',     role: 'text.url'},
+    streetAddress:  {name: 'Street Address',    type: 'string',     role: 'text'},
+    city:           {name: 'City',              type: 'string',     role: 'text'},
+    postalCode:     {name: 'Postal Code',       type: 'string',     role: 'text'},
+    country:        {name: 'Country',           type: 'string',     role: 'text'},
+    emailAddresses: {name: 'Email Addresses',   type: 'string',     role: 'text'},
+    phoneNumbers:   {name: 'Phone Numbers',     type: 'string',     role: 'text'}
 };
 
 let contacts = [];
@@ -52,7 +52,6 @@ class Contact extends utils.Adapter {
             name: 'contact',
         });
         this.on('ready', this.onReady.bind(this));
-        this.on('objectChange', this.onObjectChange.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
         this.on('unload', this.onUnload.bind(this));
         this.on('message', this.onMessage.bind(this));
@@ -94,19 +93,18 @@ class Contact extends utils.Adapter {
             common: {
                 name: 'Query phone number',
                 type: 'string',
-                role: 'contact.query',
+                role: 'text',
                 read: true,
                 write: true
             },
             native: {},
         });
-        //adapter.setStateAsync('query', { val: '', ack: true });
 
-        addState('familyName', 'Queried family name', 'string', 'contact.familyName');
-        addState('givenName', 'Queried given name', 'string', 'contact.givenName');
-        addState('fullName', 'Queried full name', 'string', 'contact.fullName');
-        addState('photo', 'Queried photo', 'string', 'contact.photo');
-        addState('id', 'Queried id', 'string', 'contact.id');
+        addState('familyName', 'Queried family name', 'string', 'text');
+        addState('givenName', 'Queried given name', 'string', 'text');
+        addState('fullName', 'Queried full name', 'string', 'text');
+        addState('photo', 'Queried photo', 'string', 'text.url');
+        addState('id', 'Queried id', 'string', 'text');
 
         // in this template all states changes inside the adapters namespace are subscribed
         this.subscribeStates('*');
@@ -132,21 +130,6 @@ class Contact extends utils.Adapter {
             callback();
         } catch (e) {
             callback();
-        }
-    }
-
-    /**
-     * Is called if a subscribed object changes
-     * @param {string} id
-     * @param {ioBroker.Object | null | undefined} obj
-     */
-    onObjectChange(id, obj) {
-        if (obj) {
-            // The object was changed
-            //this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-        } else {
-            // The object was deleted
-            //this.log.info(`object ${id} deleted`);
         }
     }
 
@@ -196,20 +179,20 @@ class Contact extends utils.Adapter {
 
 function queryViaState(number) {
 
-    addState('familyName', 'Queried family name', 'string', 'contact.familyName', '');
-    addState('givenName', 'Queried given name', 'string', 'contact.givenName', '');
-    addState('fullName', 'Queried full name', 'string', 'contact.fullName', '');
-    addState('photo', 'Queried photo', 'string', 'contact.photo', '');
-    addState('id', 'Queried id', 'string', 'contact.id', '');
+    addState('familyName', 'Queried family name', 'string', 'text', '');
+    addState('givenName', 'Queried given name', 'string', 'text', '');
+    addState('fullName', 'Queried full name', 'string', 'text', '');
+    addState('photo', 'Queried photo', 'string', 'text.url', '');
+    addState('id', 'Queried id', 'string', 'text', '');
 
     const result = queryContactByPhoneNumber(number);
 
     if(result) {
-        addState('familyName', 'Queried family name', 'string', 'contact.familyName', result.familyName);
-        addState('givenName', 'Queried given name', 'string', 'contact.givenName', result.givenName);
-        addState('fullName', 'Queried full name', 'string', 'contact.fullName', result.fullName);
-        addState('photo', 'Queried photo', 'string', 'contact.photo', result.photo);
-        addState('id', 'Queried id', 'string', 'contact.id', result.id);
+        addState('familyName', 'Queried family name', 'string', 'text', result.familyName);
+        addState('givenName', 'Queried given name', 'string', 'text', result.givenName);
+        addState('fullName', 'Queried full name', 'string', 'text', result.fullName);
+        addState('photo', 'Queried photo', 'string', 'text.url', result.photo);
+        addState('id', 'Queried id', 'string', 'ctext', result.id);
     }
 }
 
@@ -274,7 +257,7 @@ async function startRemoveScheduler(config) {
         
         if((config.googleActive && googleContactsLoaded || config.googleActive == false) && (config.nextcloudActive && nextcloudContactsLoaded || config.nextcloudActive == false)) {
             
-            adapter.getChannels(function (err, channels) {
+            adapter.getChannels((err, channels) => {
             
                 removeUnused(channels, contacts);
             });
@@ -421,7 +404,7 @@ function removeUnused(oldList, newList) {
 
 function removeChannel(id) {
 
-    adapter.getChannels(function (err, channels) {
+    adapter.getChannels((err, channels) => {
 
         for(let i = 0; i < channels.length; i++) {
             if(channels[i]._id.endsWith(id)) {
@@ -687,7 +670,7 @@ function getGoogleContacts(account, auth, index, nextPageToken = '', connections
             pageToken: nextPageToken,
             personFields: 'names,emailAddresses,photos,phoneNumbers,addresses,organizations',
         }, (err, res) => {
-            if (err) return adapter.log.info('The API returned an error: ' + err);
+            if (err) return adapter.log.error('The API returned an error: ' + err);
             if(res) {
 
                 const tmpCon = [
@@ -752,7 +735,7 @@ function initServer(settings) {
         };
 
         if(oauth2) {
-            server.app.get('/google/login/:id', function (req, res) {
+            server.app.get('/google/login/:id', (req, res) => {
 
                 const id = req.params.id;
                 
@@ -777,11 +760,11 @@ function initServer(settings) {
                 } else res.send(`Cannot find account ${req.params.id}.`);
             });
 
-            server.app.get('/google/success', function (req, res) {
+            server.app.get('/google/success', (req, res) => {
                 res.send('Done');
             });
 
-            server.app.get('/google', function (req, res) {
+            server.app.get('/google', (req, res) => {
                 if(req.query) {
                     if(req.query.state) {
                         if(req.query.state < settings.google.length && req.query.state >= 0) {
@@ -792,7 +775,7 @@ function initServer(settings) {
                                 for(let i = 0; i < scope.length; i++) {
                                     if(scope[i] == googleScope) {
 
-                                        oauth2.getToken(req.query.code, function(err, tokens) {
+                                        oauth2.getToken(req.query.code, (err, tokens) => {
 
                                             if (err) {
                                                 adapter.log.error(err);
@@ -829,12 +812,15 @@ function initServer(settings) {
         }
         
         server.server = http.createServer(server.app);
+        server.server.on('error', (err) => {
+            adapter.log.error(err);
+        });
     } else {
         adapter.log.error('Port is missing');
     }
 
     if(server && server.server) {
-        adapter.getPort(settings.port, function (port) {
+        adapter.getPort(settings.port, (port) => {
             if (port != settings.port && !adapter.config.findNextPort) {
                 adapter.log.error('Port ' + settings.port + ' already in use');
                 process.exit(1);
