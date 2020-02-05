@@ -159,6 +159,8 @@
         "type": "misc-data",
         "compact": true,
         "materialize": true,
+        "connectionType": "cloud",
+        "dataSource": "poll",
         "dependencies": [
             {
                 "js-controller": ">=1.4.2"
