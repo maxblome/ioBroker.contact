@@ -154,6 +154,7 @@
         "extIcon": "https://raw.githubusercontent.com/WLAN-Kabel/ioBroker.contact/master/admin/contact.png",
         "readme": "https://github.com/WLAN-Kabel/ioBroker.contact/blob/master/README.md",
         "loglevel": "info",
+        "tier": 2,
         "mode": "daemon",
         "messagebox": true,
         "type": "misc-data",
