@@ -148,7 +148,6 @@
         ],
         "license": "MIT",
         "platform": "Javascript/Node.js",
-        "main": "main.js",
         "icon": "contact.png",
         "enabled": true,
         "extIcon": "https://raw.githubusercontent.com/WLAN-Kabel/ioBroker.contact/master/admin/contact.png",
