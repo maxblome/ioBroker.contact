@@ -144,7 +144,7 @@ sendTo('contact.0', 'query', {phonenumberr: '+49 1234 567890'}, (obj) => {
 ## License
 MIT License
 
-Copyright (c) 2019-2020 WLAN-Kabel <wlan-kabel@outlook.de>
+Copyright (c) 2019-2026 WLAN-Kabel <wlan-kabel@outlook.de>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
