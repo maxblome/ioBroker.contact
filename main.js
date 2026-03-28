@@ -10,7 +10,7 @@ const utils = require('@iobroker/adapter-core');
 
 // Load your modules here, e.g.:
 const express = require('express');
-const http = require('http');
+const http = require('node:http');
 const cron = require('node-cron');
 const {google} = require('googleapis');
 const vcard = require('./lib/vcard');
