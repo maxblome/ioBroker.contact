@@ -141,6 +141,8 @@ sendTo('contact.0', 'query', {phonenumberr: '+49 1234 567890'}, (obj) => {
 ### 0.0.1 (2019-12-17)
 * (WLAN-Kabel) Initial release
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 MIT License
 
