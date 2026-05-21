@@ -1,198 +1,198 @@
 {
-    "common": {
-        "name": "contact",
-        "version": "1.1.3",
-        "news": {
-            "1.1.3": {
-                "en": "The roles have been changed to official once\nFixed deprecation of Buffer\nAdded error handler for http server",
-                "de": "Die Rollen wurden Offizielle geändert\nDeprecation von Buffer behoben\nFehlerbehandlungsroutine für http-Server hinzugefügt",
-                "ru": "Роли были изменены на официальные один раз\nИсправлено устаревание буфера\nДобавлен обработчик ошибок для http-сервера",
-                "pt": "Os papéis foram alterados para oficiais uma vez\nReprovação corrigida do buffer\nAdicionado manipulador de erros para o servidor http",
-                "nl": "De rollen zijn eenmaal gewijzigd in officieel\nVaste afschrijving van buffer\nFouthandler toegevoegd voor http-server",
-                "fr": "Les rôles sont devenus officiels une fois\nCorrection de la dépréciation de Buffer\nGestionnaire d'erreurs ajouté pour le serveur http",
-                "it": "I ruoli sono stati cambiati in ufficiali una volta\nCorretto l'ammortamento del buffer\nAggiunto gestore degli errori per il server http",
-                "es": "Los roles se han cambiado a oficial una vez\nDesaprobación fija de Buffer\nSe agregó un controlador de errores para el servidor http",
-                "pl": "Role zostały raz zmienione na oficjalne\nNaprawiono wycofanie bufora\nDodano obsługę błędów dla serwera http",
-                "zh-cn": "角色一次更改为正式\n固定弃用缓冲区\n为HTTP服务器添加了错误处理程序"
-            },
-            "1.1.2": {
-                "en": "Server will stopped on unload\nRemoved adapter from state settings",
-                "de": "Der Server wird beim Entladen gestoppt.\nAdapter aus den Stateeinstellungen entfernt",
-                "ru": "Сервер будет остановлен при выгрузке\nУдален адаптер из настроек состояния",
-                "pt": "O servidor será parado ao descarregar\nAdaptador removido das configurações de estado",
-                "nl": "Server stopt bij verwijderen\nAdapter verwijderd uit statusinstellingen",
-                "fr": "Le serveur sera arrêté lors du déchargement\nAdaptateur supprimé des paramètres d'état",
-                "it": "Il server verrà arrestato allo scaricamento\nAdattatore rimosso dalle impostazioni dello stato",
-                "es": "El servidor se detendrá al descargar\nEl adaptador eliminado de la configuración de estado",
-                "pl": "Serwer zatrzyma się po zwolnieniu\nUsunięto adapter z ustawień stanu",
-                "zh-cn": "服务器将在卸载时停止\n从状态设置中删除了适配器"
-            },
-            "1.1.1": {
-                "en": "Cron job will stopped on unload\nFixed an issue where not all states were deleted\nAdded some debug messages",
-                "de": "Cron-Job wird beim Unload gestoppt.\nEin Problem wurde behoben, bei dem nicht alle States gelöscht wurden.\nEinige Debug-Meldungen wurden hinzugefügt",
-                "ru": "Задание Cron будет остановлено при выгрузке\nИсправлена проблема, при которой не все состояния были удалены\nДобавлены некоторые отладочные сообщения",
-                "pt": "O trabalho de criação foi interrompido ao descarregar\nFixou um problema em que nem todos os estados foram excluídos\nAdicionou algumas mensagens de depuração",
-                "nl": "Cron-taak wordt gestopt bij verwijderen\nEen probleem opgelost waarbij niet alle toestanden werden verwijderd\n Enkele foutopsporingsberichten toegevoegd",
-                "fr": "Le travail Cron sera arrêté lors du déchargement\nFixé un problème où tous les états n'étaient pas supprimés\nAjout de certains messages de débogage",
-                "it": "Cron job verrà interrotto allo scaricamento\nRisolto un problema in cui non tutti gli stati venivano eliminati\nAggiunti alcuni messaggi di debug",
-                "es": "El trabajo de Cron se detendrá al descargar\nSe solucionó un problema por el que no todos los estados se eliminaron\nAñadió algunos mensajes de depuración",
-                "pl": "Zadanie Crona zostanie zatrzymane przy rozładowaniu\nNaprawiono problem polegający na tym, że nie wszystkie stany zostały usunięte\nDodano niektóre komunikaty debugowania",
-                "zh-cn": "Cron作业将在卸载时停止\n修复了并非所有状态都被删除的问题\n添加了一些调试消息"
-            },
-            "1.1.0": {
-                "en": "sendTo() is now supported\nFixed issue where roads are being written into the roll\nFixed issue where contacts are deleted when refreshed",
-                "de": "sendTo() wird jetzt unterstützt.\nProblem behoben, bei dem Straßen in die Rolle geschrieben werden.\nProblem behoben, bei dem Kontakte beim Aktualisieren gelöscht werden",
-                "ru": "sendTo() теперь поддерживается\nИсправлена проблема, при которой дороги записываются в рулон\nИсправлена проблема, при которой контакты удаляются при обновлении.",
-                "pt": "sendTo() agora é suportado\nFixo corrigido em que as estradas estão sendo gravadas no rolo\nFixo corrigido em que os contatos são excluídos quando atualizados",
-                "nl": "sendTo() wordt nu ondersteund\nVast probleem waarbij wegen in de rol worden geschreven\nVast probleem waarbij contacten worden verwijderd wanneer ze worden vernieuwd",
-                "fr": "sendTo() est maintenant pris en charge\nFixed issue where routes are being writing into the roll\nFixed issue where contacts are supprimé when refreshed refresh",
-                "it": "sendTo() è ora supportato\nRisolto problema in cui le strade venivano scritte nel rotolo\nRisolto problema in cui i contatti venivano eliminati quando aggiornati",
-                "es": "sendTo() ahora es compatible\nProblema fijo donde las carreteras se escriben en el rollo\nProblema fijo donde los contactos se eliminan cuando se actualizan",
-                "pl": "funkcja sendTo() jest teraz obsługiwana\nNaprawiony problem polegający na zapisywaniu dróg w rolce\nNaprawiony problem polegający na usuwaniu kontaktów po odświeżeniu",
-                "zh-cn": "现在支持sendTo（）\n已修复将道路写入路段的问题\n已修复了刷新时删除联系人的问题"
-            },
-            "1.0.1": {
-                "en": "Fixed problem with companies in google contacts\nRemoved undefined from fullName if one name is missing\nAdapter no longer hangs on the schedule\nNextcloud default password changed because the old password caused messages",
-                "de": "Problem mit Unternehmen in Google-Kontakten behoben.\nundefined von fullName entfernt, wenn ein Name fehlt.\nAdapter hängt sich nicht mehr beim Aktualisieren auf.\nNextcloud-Standardkennwort geändert, da das alte Kennwort Nachrichten verursachte",
-                "ru": "Исправлена проблема с компаниями в контактах google.\nУдалите неопределенное из полного имени, если отсутствует одно имя\nАдаптер больше не зависает в расписании\nСледующий пароль по умолчанию изменен, поскольку старый пароль вызывал сообщения",
-                "pt": "Corrigido o problema com empresas nos contatos do Google\nRemovido indefinido de fullName se um nome estiver ausente\nO adaptador não trava mais no agendamento\nA senha padrão do Nextcloud foi alterada porque a senha antiga causou mensagens",
-                "nl": "Probleem opgelost met bedrijven in Google-contacten\nVerwijderd ongedefinieerd van fullName als een naam ontbreekt\nAdapter hangt niet langer aan het schema\nVolgende standaardwachtwoord gewijzigd omdat het oude wachtwoord berichten veroorzaakte",
-                "fr": "Correction d'un problème avec les entreprises dans les contacts google\nSupprimé non défini de fullName si un nom est manquant\nAdapter ne se bloque plus sur la planification\nLe mot de passe par défaut de Nextcloud a été modifié car l'ancien mot de passe provoquait des messages",
-                "it": "Risolto il problema con le aziende nei contatti di Google\nRimosso non definito da fullName se manca un nome\nAdapter non si blocca più nella pianificazione\nLa password predefinita di Nextcloud è cambiata perché la vecchia password causava messaggi",
-                "es": "Se corrigió el problema con las empresas en los contactos de google\nSe eliminó indefinido de fullName si faltaba un nombre\nAdapter ya no se cuelga en la programación\nSe cambió la contraseña predeterminada de Nextcloud porque la contraseña anterior causaba mensajes",
-                "pl": "Naprawiono problem z firmami w kontaktach Google\nUsunięto niezdefiniowany z fullName, jeśli brakuje jednej nazwy\nAdapter nie zawiesza się już w harmonogramie\nNextcloud domyślne hasło zostało zmienione, ponieważ stare hasło powodowało wiadomości",
-                "zh-cn": "修复了Google联系人中公司的问题\n如果缺少一个名称，则将其从fullName中删除未定义\n适配器不再挂在日程表上\nNextcloud默认密码已更改，因为旧密码导致出现了消息"
-            },
-            "1.0.0": {
-                "en": "Added Nextcloud contacts\nAdded state fullName to query and each contact\nFQDN and interval moved to main tab\nChanged channel name for addresses, emailAddresses and phoneNumbers\nAdded type state for emailAddresses and phoneNumbers",
-                "de": "Nextcloud-Kontakte hinzugefügt\nState fullName zur Abfrage und zu jedem Kontakt hinzugefügt\nFQDN und Intervall auf die Hauptregisterkarte verschoben\nChannelname für Adressen, E-Mail-Adressen und Telefonnummern geändert\nTypen-State für E-Mail-Adressen und Telefonnummern hinzugefügt",
-                "ru": "Добавлены контакты Nextcloud\nДобавлено состояние fullName для запроса, и каждый контакт\nFQDN и интервал перемещены на главную вкладку\nИзмененное имя канала для адресов, адресов электронной почты и номеров телефонов\nСостояние добавленного типа для адресов электронной почты адресов и номеров телефонов",
-                "pt": "Adicionados contatos Nextcloud\nAdicionado estado fullName para consulta e cada contato\nFQDN e intervalo foram movidos para a guia principal\nNome do canal alterado para endereços, emailAddresses e phoneNumbers\nEstado de tipo adicionado para emailAddresses e phoneNumbers",
-                "nl": "Nextcloud-contacten toegevoegd\nToestand volledige naam toegevoegd aan zoekopdracht en elk contact\nFQDN en interval verplaatst naar hoofdtabblad\nVeranderde kanaalnaam voor adressen, e-mailAdressen en telefoonnummers\nType toegevoegd voor e-mailAdressen en telefoonnummers",
-                "fr": "Contacts Nextcloud ajoutés\nÉtat ajouté nom complet à la requête et chaque contact\nFQDN et intervalle déplacés vers l'onglet principal\nNom de canal modifié pour les adresses, adresses électroniques et numéros de téléphone\nÉtat du type ajouté pour les adresses e-mail et numéros de téléphone",
-                "it": "Aggiunti contatti Nextcloud\nStato aggiunto fullName da interrogare e ogni contatto\nFQDN e intervallo spostati nella scheda principale\nNome del canale modificato per indirizzi, e-mailIndirizzo e numero di telefono\nStato di tipo aggiunto per e-mail Indirizzo e numero di telefono",
-                "es": "Se agregaron los contactos de Nextcloud\nSe agregó el nombre completo del estado a la consulta y cada contacto\nFQDN y el intervalo se movieron a la pestaña principal\nSe cambió el nombre del canal para direcciones, direcciones de correo electrónico y números de teléfono\nSe agregó el tipo de estado para direcciones de correo electrónico y números de teléfono",
-                "pl": "Dodano kontakty Nextcloud\nDodano stan fullName do zapytania, a każdy kontakt\nFQDN i interwał przeniesiono na kartę główną\nZmieniono nazwę kanału dla adresów, adresów e-mail i numerów telefonów",
-                "zh-cn": "已添加Nextcloud联系人\n已添加状态全名以进行查询和每个联系人\nFQDN和间隔已移至主选项卡\n已更改地址，电子邮件地址和电话号码的频道名称\n已添加了电子邮件地址和电话号码的类型状态"
-            },
-            "0.0.3": {
-                "en": "Standard country code can now be selected yourself.",
-                "de": "Der Standard-Ländercode kann jetzt selbst ausgewählt werden.",
-                "ru": "Стандартный код страны теперь можно выбрать самостоятельно.",
-                "pt": "O código padrão do país agora pode ser selecionado você mesmo.",
-                "nl": "De standaardlandcode kan nu zelf worden geselecteerd.",
-                "fr": "Le code pays standard peut maintenant être sélectionné vous-même.",
-                "it": "Ora è possibile selezionare manualmente il codice paese standard.",
-                "es": "El código de país estándar ahora puede seleccionarse usted mismo.",
-                "pl": "Standardowy kod kraju można teraz wybrać samodzielnie.",
-                "zh-cn": "现在可以自行选择标准国家/地区代码。"
-            },
-            "0.0.2": {
-                "en": "Fixed an issue that restricted the search.\nLimit of 100 contacts has been removed.",
-                "de": "Es wurde ein Problem behoben, durch das die Suche eingeschränkt wurde.\nBegrenzung von 100 Kontakten wurde entfernt.",
-                "ru": "Исправлена проблема, которая ограничивала поиск.\nОпределено 100 контактов.",
-                "pt": "Corrigido um problema que restringia a pesquisa.\nO limite de 100 contatos foi removido.",
-                "nl": "Probleem opgelost dat de zoekopdracht beperkte.\nBeperking van 100 contacten is verwijderd.",
-                "fr": "Correction d'un problème qui limitait la recherche.\nLa limite de 100 contacts a été supprimée.",
-                "it": "Risolto il problema che limitava la ricerca.\nIl limite di 100 contatti è stato rimosso.",
-                "es": "Se solucionó un problema que restringía la búsqueda.\nSe eliminó el límite de 100 contactos.",
-                "pl": "Naprawiono problem ograniczający wyszukiwanie.\nOgraniczono 100 kontaktów.",
-                "zh-cn": "已解决限制搜索的问题。\n限制了100个联系人。"
-            },
-            "0.0.1": {
-                "en": "initial release",
-                "de": "Erstveröffentlichung",
-                "ru": "Начальная версия",
-                "pt": "lançamento inicial",
-                "nl": "Eerste uitgave",
-                "fr": "Première version",
-                "it": "Versione iniziale",
-                "es": "Versión inicial",
-                "pl": "Pierwsze wydanie",
-                "zh-cn": "首次出版"
-            }
-        },
-        "title": "Contact",
-        "titleLang": {
-            "en": "contact",
-            "de": "Kontakt",
-            "ru": "контакт",
-            "pt": "contato",
-            "nl": "contact",
-            "fr": "contact",
-            "it": "contatto",
-            "es": "contacto",
-            "pl": "kontakt",
-            "zh-cn": "联系"
-        },
-        "desc": {
-            "en": "Connect to your google and nextcloud contacts",
-            "de": "Stellen Sie eine Verbindung zu Ihren Google- und NextCloud-Kontakten her",
-            "ru": "Подключитесь к своим контактам в Google и NextCloud",
-            "pt": "Conecte-se aos seus contatos do google e nextcloud",
-            "nl": "Maak verbinding met uw google- en nextcloud-contacten",
-            "fr": "Connectez-vous à vos contacts google et nextcloud",
-            "it": "Collegati ai tuoi contatti google e nextcloud",
-            "es": "Conéctese a sus contactos de google y nextcloud",
-            "pl": "Połącz się z kontaktami google i nextcloud",
-            "zh-cn": "连接到您的Google和nextcloud联系人"
-        },
-        "authors": [
-            "WLAN-Kabel wlan-kabel@outlook.de"
-        ],
-        "keywords": [
-            "ioBroker",
-            "contact",
-            "Smart Home",
-            "home automation"
-        ],
-        "license": "MIT",
-        "platform": "Javascript/Node.js",
-        "main": "main.js",
-        "icon": "contact.png",
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/WLAN-Kabel/ioBroker.contact/master/admin/contact.png",
-        "readme": "https://github.com/WLAN-Kabel/ioBroker.contact/blob/master/README.md",
-        "loglevel": "info",
-        "mode": "daemon",
-        "messagebox": true,
-        "type": "misc-data",
-        "compact": true,
-        "materialize": true,
-        "connectionType": "cloud",
-        "dataSource": "poll",
-        "dependencies": [
-            {
-                "js-controller": ">=1.4.2"
-            }
-        ]
+  "common": {
+    "name": "contact",
+    "version": "1.1.3",
+    "news": {
+      "1.1.3": {
+        "en": "The roles have been changed to official once\nFixed deprecation of Buffer\nAdded error handler for http server",
+        "de": "Die Rollen wurden Offizielle geändert\nDeprecation von Buffer behoben\nFehlerbehandlungsroutine für http-Server hinzugefügt",
+        "ru": "Роли были изменены на официальные один раз\nИсправлено устаревание буфера\nДобавлен обработчик ошибок для http-сервера",
+        "pt": "Os papéis foram alterados para oficiais uma vez\nReprovação corrigida do buffer\nAdicionado manipulador de erros para o servidor http",
+        "nl": "De rollen zijn eenmaal gewijzigd in officieel\nVaste afschrijving van buffer\nFouthandler toegevoegd voor http-server",
+        "fr": "Les rôles sont devenus officiels une fois\nCorrection de la dépréciation de Buffer\nGestionnaire d'erreurs ajouté pour le serveur http",
+        "it": "I ruoli sono stati cambiati in ufficiali una volta\nCorretto l'ammortamento del buffer\nAggiunto gestore degli errori per il server http",
+        "es": "Los roles se han cambiado a oficial una vez\nDesaprobación fija de Buffer\nSe agregó un controlador de errores para el servidor http",
+        "pl": "Role zostały raz zmienione na oficjalne\nNaprawiono wycofanie bufora\nDodano obsługę błędów dla serwera http",
+        "zh-cn": "角色一次更改为正式\n固定弃用缓冲区\n为HTTP服务器添加了错误处理程序"
+      },
+      "1.1.2": {
+        "en": "Server will stopped on unload\nRemoved adapter from state settings",
+        "de": "Der Server wird beim Entladen gestoppt.\nAdapter aus den Stateeinstellungen entfernt",
+        "ru": "Сервер будет остановлен при выгрузке\nУдален адаптер из настроек состояния",
+        "pt": "O servidor será parado ao descarregar\nAdaptador removido das configurações de estado",
+        "nl": "Server stopt bij verwijderen\nAdapter verwijderd uit statusinstellingen",
+        "fr": "Le serveur sera arrêté lors du déchargement\nAdaptateur supprimé des paramètres d'état",
+        "it": "Il server verrà arrestato allo scaricamento\nAdattatore rimosso dalle impostazioni dello stato",
+        "es": "El servidor se detendrá al descargar\nEl adaptador eliminado de la configuración de estado",
+        "pl": "Serwer zatrzyma się po zwolnieniu\nUsunięto adapter z ustawień stanu",
+        "zh-cn": "服务器将在卸载时停止\n从状态设置中删除了适配器"
+      },
+      "1.1.1": {
+        "en": "Cron job will stopped on unload\nFixed an issue where not all states were deleted\nAdded some debug messages",
+        "de": "Cron-Job wird beim Unload gestoppt.\nEin Problem wurde behoben, bei dem nicht alle States gelöscht wurden.\nEinige Debug-Meldungen wurden hinzugefügt",
+        "ru": "Задание Cron будет остановлено при выгрузке\nИсправлена проблема, при которой не все состояния были удалены\nДобавлены некоторые отладочные сообщения",
+        "pt": "O trabalho de criação foi interrompido ao descarregar\nFixou um problema em que nem todos os estados foram excluídos\nAdicionou algumas mensagens de depuração",
+        "nl": "Cron-taak wordt gestopt bij verwijderen\nEen probleem opgelost waarbij niet alle toestanden werden verwijderd\n Enkele foutopsporingsberichten toegevoegd",
+        "fr": "Le travail Cron sera arrêté lors du déchargement\nFixé un problème où tous les états n'étaient pas supprimés\nAjout de certains messages de débogage",
+        "it": "Cron job verrà interrotto allo scaricamento\nRisolto un problema in cui non tutti gli stati venivano eliminati\nAggiunti alcuni messaggi di debug",
+        "es": "El trabajo de Cron se detendrá al descargar\nSe solucionó un problema por el que no todos los estados se eliminaron\nAñadió algunos mensajes de depuración",
+        "pl": "Zadanie Crona zostanie zatrzymane przy rozładowaniu\nNaprawiono problem polegający na tym, że nie wszystkie stany zostały usunięte\nDodano niektóre komunikaty debugowania",
+        "zh-cn": "Cron作业将在卸载时停止\n修复了并非所有状态都被删除的问题\n添加了一些调试消息"
+      },
+      "1.1.0": {
+        "en": "sendTo() is now supported\nFixed issue where roads are being written into the roll\nFixed issue where contacts are deleted when refreshed",
+        "de": "sendTo() wird jetzt unterstützt.\nProblem behoben, bei dem Straßen in die Rolle geschrieben werden.\nProblem behoben, bei dem Kontakte beim Aktualisieren gelöscht werden",
+        "ru": "sendTo() теперь поддерживается\nИсправлена проблема, при которой дороги записываются в рулон\nИсправлена проблема, при которой контакты удаляются при обновлении.",
+        "pt": "sendTo() agora é suportado\nFixo corrigido em que as estradas estão sendo gravadas no rolo\nFixo corrigido em que os contatos são excluídos quando atualizados",
+        "nl": "sendTo() wordt nu ondersteund\nVast probleem waarbij wegen in de rol worden geschreven\nVast probleem waarbij contacten worden verwijderd wanneer ze worden vernieuwd",
+        "fr": "sendTo() est maintenant pris en charge\nFixed issue where routes are being writing into the roll\nFixed issue where contacts are supprimé when refreshed refresh",
+        "it": "sendTo() è ora supportato\nRisolto problema in cui le strade venivano scritte nel rotolo\nRisolto problema in cui i contatti venivano eliminati quando aggiornati",
+        "es": "sendTo() ahora es compatible\nProblema fijo donde las carreteras se escriben en el rollo\nProblema fijo donde los contactos se eliminan cuando se actualizan",
+        "pl": "funkcja sendTo() jest teraz obsługiwana\nNaprawiony problem polegający na zapisywaniu dróg w rolce\nNaprawiony problem polegający na usuwaniu kontaktów po odświeżeniu",
+        "zh-cn": "现在支持sendTo（）\n已修复将道路写入路段的问题\n已修复了刷新时删除联系人的问题"
+      },
+      "1.0.1": {
+        "en": "Fixed problem with companies in google contacts\nRemoved undefined from fullName if one name is missing\nAdapter no longer hangs on the schedule\nNextcloud default password changed because the old password caused messages",
+        "de": "Problem mit Unternehmen in Google-Kontakten behoben.\nundefined von fullName entfernt, wenn ein Name fehlt.\nAdapter hängt sich nicht mehr beim Aktualisieren auf.\nNextcloud-Standardkennwort geändert, da das alte Kennwort Nachrichten verursachte",
+        "ru": "Исправлена проблема с компаниями в контактах google.\nУдалите неопределенное из полного имени, если отсутствует одно имя\nАдаптер больше не зависает в расписании\nСледующий пароль по умолчанию изменен, поскольку старый пароль вызывал сообщения",
+        "pt": "Corrigido o problema com empresas nos contatos do Google\nRemovido indefinido de fullName se um nome estiver ausente\nO adaptador não trava mais no agendamento\nA senha padrão do Nextcloud foi alterada porque a senha antiga causou mensagens",
+        "nl": "Probleem opgelost met bedrijven in Google-contacten\nVerwijderd ongedefinieerd van fullName als een naam ontbreekt\nAdapter hangt niet langer aan het schema\nVolgende standaardwachtwoord gewijzigd omdat het oude wachtwoord berichten veroorzaakte",
+        "fr": "Correction d'un problème avec les entreprises dans les contacts google\nSupprimé non défini de fullName si un nom est manquant\nAdapter ne se bloque plus sur la planification\nLe mot de passe par défaut de Nextcloud a été modifié car l'ancien mot de passe provoquait des messages",
+        "it": "Risolto il problema con le aziende nei contatti di Google\nRimosso non definito da fullName se manca un nome\nAdapter non si blocca più nella pianificazione\nLa password predefinita di Nextcloud è cambiata perché la vecchia password causava messaggi",
+        "es": "Se corrigió el problema con las empresas en los contactos de google\nSe eliminó indefinido de fullName si faltaba un nombre\nAdapter ya no se cuelga en la programación\nSe cambió la contraseña predeterminada de Nextcloud porque la contraseña anterior causaba mensajes",
+        "pl": "Naprawiono problem z firmami w kontaktach Google\nUsunięto niezdefiniowany z fullName, jeśli brakuje jednej nazwy\nAdapter nie zawiesza się już w harmonogramie\nNextcloud domyślne hasło zostało zmienione, ponieważ stare hasło powodowało wiadomości",
+        "zh-cn": "修复了Google联系人中公司的问题\n如果缺少一个名称，则将其从fullName中删除未定义\n适配器不再挂在日程表上\nNextcloud默认密码已更改，因为旧密码导致出现了消息"
+      },
+      "1.0.0": {
+        "en": "Added Nextcloud contacts\nAdded state fullName to query and each contact\nFQDN and interval moved to main tab\nChanged channel name for addresses, emailAddresses and phoneNumbers\nAdded type state for emailAddresses and phoneNumbers",
+        "de": "Nextcloud-Kontakte hinzugefügt\nState fullName zur Abfrage und zu jedem Kontakt hinzugefügt\nFQDN und Intervall auf die Hauptregisterkarte verschoben\nChannelname für Adressen, E-Mail-Adressen und Telefonnummern geändert\nTypen-State für E-Mail-Adressen und Telefonnummern hinzugefügt",
+        "ru": "Добавлены контакты Nextcloud\nДобавлено состояние fullName для запроса, и каждый контакт\nFQDN и интервал перемещены на главную вкладку\nИзмененное имя канала для адресов, адресов электронной почты и номеров телефонов\nСостояние добавленного типа для адресов электронной почты адресов и номеров телефонов",
+        "pt": "Adicionados contatos Nextcloud\nAdicionado estado fullName para consulta e cada contato\nFQDN e intervalo foram movidos para a guia principal\nNome do canal alterado para endereços, emailAddresses e phoneNumbers\nEstado de tipo adicionado para emailAddresses e phoneNumbers",
+        "nl": "Nextcloud-contacten toegevoegd\nToestand volledige naam toegevoegd aan zoekopdracht en elk contact\nFQDN en interval verplaatst naar hoofdtabblad\nVeranderde kanaalnaam voor adressen, e-mailAdressen en telefoonnummers\nType toegevoegd voor e-mailAdressen en telefoonnummers",
+        "fr": "Contacts Nextcloud ajoutés\nÉtat ajouté nom complet à la requête et chaque contact\nFQDN et intervalle déplacés vers l'onglet principal\nNom de canal modifié pour les adresses, adresses électroniques et numéros de téléphone\nÉtat du type ajouté pour les adresses e-mail et numéros de téléphone",
+        "it": "Aggiunti contatti Nextcloud\nStato aggiunto fullName da interrogare e ogni contatto\nFQDN e intervallo spostati nella scheda principale\nNome del canale modificato per indirizzi, e-mailIndirizzo e numero di telefono\nStato di tipo aggiunto per e-mail Indirizzo e numero di telefono",
+        "es": "Se agregaron los contactos de Nextcloud\nSe agregó el nombre completo del estado a la consulta y cada contacto\nFQDN y el intervalo se movieron a la pestaña principal\nSe cambió el nombre del canal para direcciones, direcciones de correo electrónico y números de teléfono\nSe agregó el tipo de estado para direcciones de correo electrónico y números de teléfono",
+        "pl": "Dodano kontakty Nextcloud\nDodano stan fullName do zapytania, a każdy kontakt\nFQDN i interwał przeniesiono na kartę główną\nZmieniono nazwę kanału dla adresów, adresów e-mail i numerów telefonów",
+        "zh-cn": "已添加Nextcloud联系人\n已添加状态全名以进行查询和每个联系人\nFQDN和间隔已移至主选项卡\n已更改地址，电子邮件地址和电话号码的频道名称\n已添加了电子邮件地址和电话号码的类型状态"
+      },
+      "0.0.3": {
+        "en": "Standard country code can now be selected yourself.",
+        "de": "Der Standard-Ländercode kann jetzt selbst ausgewählt werden.",
+        "ru": "Стандартный код страны теперь можно выбрать самостоятельно.",
+        "pt": "O código padrão do país agora pode ser selecionado você mesmo.",
+        "nl": "De standaardlandcode kan nu zelf worden geselecteerd.",
+        "fr": "Le code pays standard peut maintenant être sélectionné vous-même.",
+        "it": "Ora è possibile selezionare manualmente il codice paese standard.",
+        "es": "El código de país estándar ahora puede seleccionarse usted mismo.",
+        "pl": "Standardowy kod kraju można teraz wybrać samodzielnie.",
+        "zh-cn": "现在可以自行选择标准国家/地区代码。"
+      },
+      "0.0.2": {
+        "en": "Fixed an issue that restricted the search.\nLimit of 100 contacts has been removed.",
+        "de": "Es wurde ein Problem behoben, durch das die Suche eingeschränkt wurde.\nBegrenzung von 100 Kontakten wurde entfernt.",
+        "ru": "Исправлена проблема, которая ограничивала поиск.\nОпределено 100 контактов.",
+        "pt": "Corrigido um problema que restringia a pesquisa.\nO limite de 100 contatos foi removido.",
+        "nl": "Probleem opgelost dat de zoekopdracht beperkte.\nBeperking van 100 contacten is verwijderd.",
+        "fr": "Correction d'un problème qui limitait la recherche.\nLa limite de 100 contacts a été supprimée.",
+        "it": "Risolto il problema che limitava la ricerca.\nIl limite di 100 contatti è stato rimosso.",
+        "es": "Se solucionó un problema que restringía la búsqueda.\nSe eliminó el límite de 100 contactos.",
+        "pl": "Naprawiono problem ograniczający wyszukiwanie.\nOgraniczono 100 kontaktów.",
+        "zh-cn": "已解决限制搜索的问题。\n限制了100个联系人。"
+      },
+      "0.0.1": {
+        "en": "initial release",
+        "de": "Erstveröffentlichung",
+        "ru": "Начальная версия",
+        "pt": "lançamento inicial",
+        "nl": "Eerste uitgave",
+        "fr": "Première version",
+        "it": "Versione iniziale",
+        "es": "Versión inicial",
+        "pl": "Pierwsze wydanie",
+        "zh-cn": "首次出版"
+      }
     },
-    "native": {
-        "port": 8096,
-        "googleActive": false,
-        "fqdn": "localhost",
-        "interval": 12,
-        "google": [
-            {
-              "name": "Contact Google",
-              "accessToken": "",
-              "refreshToken": "",
-              "id": "",
-              "country": "+49 (Germany)"
-            }
-        ],
-        "nextcloudActive": false,
-        "nextcloud": [
-            {
-              "name": "Contact Nextcloud",
-              "hostname": "https://nextcloud.example.com",
-              "username": "max.mustermann@example.com",
-              "password": "2SS8W2Zve34nWZzt",
-              "id": "",
-              "country": "+49 (Germany)"
-            }
-        ]
+    "title": "Contact",
+    "titleLang": {
+      "en": "contact",
+      "de": "Kontakt",
+      "ru": "контакт",
+      "pt": "contato",
+      "nl": "contact",
+      "fr": "contact",
+      "it": "contatto",
+      "es": "contacto",
+      "pl": "kontakt",
+      "zh-cn": "联系"
     },
-    "objects": [],
-    "instanceObjects": []
+    "desc": {
+      "en": "Connect to your google and nextcloud contacts",
+      "de": "Stellen Sie eine Verbindung zu Ihren Google- und NextCloud-Kontakten her",
+      "ru": "Подключитесь к своим контактам в Google и NextCloud",
+      "pt": "Conecte-se aos seus contatos do google e nextcloud",
+      "nl": "Maak verbinding met uw google- en nextcloud-contacten",
+      "fr": "Connectez-vous à vos contacts google et nextcloud",
+      "it": "Collegati ai tuoi contatti google e nextcloud",
+      "es": "Conéctese a sus contactos de google y nextcloud",
+      "pl": "Połącz się z kontaktami google i nextcloud",
+      "zh-cn": "连接到您的Google和nextcloud联系人"
+    },
+    "authors": [
+      "WLAN-Kabel wlan-kabel@outlook.de"
+    ],
+    "keywords": [
+      "ioBroker",
+      "contact",
+      "Smart Home",
+      "home automation"
+    ],
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "main": "main.js",
+    "icon": "contact.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/WLAN-Kabel/ioBroker.contact/master/admin/contact.png",
+    "readme": "https://github.com/WLAN-Kabel/ioBroker.contact/blob/master/README.md",
+    "loglevel": "info",
+    "mode": "daemon",
+    "messagebox": true,
+    "type": "misc-data",
+    "compact": true,
+    "materialize": true,
+    "connectionType": "cloud",
+    "dataSource": "poll",
+    "dependencies": [
+      {
+        "js-controller": ">=6.0.11"
+      }
+    ]
+  },
+  "native": {
+    "port": 8096,
+    "googleActive": false,
+    "fqdn": "localhost",
+    "interval": 12,
+    "google": [
+      {
+        "name": "Contact Google",
+        "accessToken": "",
+        "refreshToken": "",
+        "id": "",
+        "country": "+49 (Germany)"
+      }
+    ],
+    "nextcloudActive": false,
+    "nextcloud": [
+      {
+        "name": "Contact Nextcloud",
+        "hostname": "https://nextcloud.example.com",
+        "username": "max.mustermann@example.com",
+        "password": "2SS8W2Zve34nWZzt",
+        "id": "",
+        "country": "+49 (Germany)"
+      }
+    ]
+  },
+  "objects": [],
+  "instanceObjects": []
 }
