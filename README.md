@@ -99,6 +99,10 @@ sendTo('contact.0', 'query', {phonenumberr: '+49 1234 567890'}, (obj) => {
 
 ## Changelog
 
+
+### **WORK IN PROGRESS**
+- (ioBroker-Bot) Adapter requires js-controller >= 6.0.11 now.
+
 ### 1.1.3 (2020-01-23)
 * (WLAN-Kabel) The roles have been changed to official once
 * (WLAN-Kabel) Fixed deprecation of Buffer
